@@ -283,16 +283,12 @@ p {
   background: #fff1ec;
 }
 
+/* Chips wrap rather than scroll, so every category stays in sight. */
 .chips {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
-  overflow-x: auto;
   padding: 4px 2px 8px;
-  scrollbar-width: none;
-}
-
-.chips::-webkit-scrollbar {
-  display: none;
 }
 
 .chips > * {

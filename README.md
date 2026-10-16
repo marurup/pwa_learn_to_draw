@@ -8,23 +8,33 @@ Skærmen er kun instruktør: den viser trin for trin, hvad der skal tegnes, og g
 ## Hvad kan appen?
 
 - **Personlig start:** sprog (dansk/engelsk), navn, alder og en tegne-ven. Flere søskende kan have hver sin profil.
-- **Vælg selv eller få hjælp:** et katalog med billedkort og filtre (kategori, underkategori, niveau) –
-  eller to spørgsmål ("Hvor meget har du tegnet før?" og "Hvad har du lyst til?"), der giver tre forslag.
+- **Vælg selv eller få hjælp:** et katalog med billedkort og filtre (kategori, underkategori, niveau, stil) –
+  eller tre spørgsmål ("Hvor meget har du tegnet før?", "Hvad har du lyst til?" og "Hvordan vil du tegne?"),
+  der giver tre forslag.
 - **Trin for trin:** Det, man allerede har tegnet, står i gråt. Den nye streg bliver "tegnet" i farve foran barnet,
   og hjælpelinjer er stiplede ("tegn dem let"). Man kan gå frem og tilbage, swipe, hoppe til et trin,
   se animationen igen og få teksten læst op. Skærmen slukker ikke midt i en tegning.
-- **Fire niveauer, 25 tegninger:**
-  1. *Spire* – streger og former, prik-til-prik (fisk, stjerne, hus, raket), sol og blomst
-  2. *Tegner* – figurer bygget af former: ansigt, kat, fisk, fugl, hus, bil, raket, æbletræ
-  3. *Kunstner* – hjælpelinjer, proportioner og bevægelseslinjer: ansigt, ugle, hundehvalp, delfin, elefant
-  4. *Mester* – toneskala, skravering, skygge på en kugle, 1- og 2-punkts perspektiv, tre stilarter
+- **66 tegninger på fire niveauer** (*Spire*, *Tegner*, *Kunstner*, *Mester*):
+  - *Dyr:* kat, fisk, fugl, ugle, hvalp, delfin, elefant, sommerfugl, pingvin, kanin, papegøje, hest og en naturtro ræv
+  - *Natur:* blomster (solsikke, tulipan, rose, kaktus, blade, buket i vase), bjerge, strand, solnedgang over havet og et træ
+  - *Mennesker:* ansigter, følelser, frisurer, profil, øjne, næse og mund, portræt med skygger og en hel krop
+  - *Ting:* hus, bil, raket, fly, fyrtårn og slot
+  - *Fantasi:* robot, enhjørning og drage
+  - *Teknik:* streger, toneskala, skravering, skygge på en kugle, cylinder og kegle, teksturer, stilleben,
+    1- og 2-punkts perspektiv og den samme kat i tre stilarter
+  - *Prik-til-prik:* fisk, stjerne, hus og raket
+- **Tre stilarter:** ✏️ *Enkel* (bygget af former), ✨ *Med detaljer* (mønstre, tekstur, glans og let skygge) og
+  🎨 *Naturtro* (hjælpelinjer, rigtige proportioner og bløde skygger).
+- **Byg videre bagefter:** Når en enkel tegning er færdig, foreslår appen "Gør den mere detaljeret" eller
+  "Prøv den naturtro udgave". En byg videre-lektion starter med den færdige tegning i gråt, så barnet fortsætter
+  på samme papir – fx kat → kat med pels og skygge, rose → naturtro rose, ansigt → portræt med skygger.
 - **Prik-til-prik på papir:** print prikkerne (A4), eller brug **kalkér-tilstand**: Læg papiret på skærmen og tegn op.
   Berøring er låst, så blyanten ikke trykker på noget (hold knappen inde for at låse op).
 - **Når tegningen er færdig:** tag et billede, beskær og drej, og gør papiret hvidt (lyset bliver jævnet ud).
   Barnet får personlig ros, et "næste gang kan du prøve …"-tip og bliver spurgt "Hvad synes du selv?".
   Tegningen kan gøres levende (vibrerende streger, dans), få baggrund og ramme, sammenlignes med forlægget
   og **deles** via enhedens del-menu.
-- **Galleri og mærker** pr. tegner, fx "Første tegning", "Prikkemester" og "Skyggemester".
+- **Galleri og mærker** pr. tegner, fx "Første tegning", "Prikkemester", "Skyggemester", "Detaljejæger" og "Naturtro".
 - **For voksne** (hold tandhjulet inde): sprog, tegnere, automatisk oplæsning, sletning af billeder og gode råd.
 - **Virker offline**, og alt bliver på enheden – ingen server og ingen tracking.
 
@@ -78,13 +88,21 @@ export const snail: Lesson = {
 }
 ```
 
-- `kind: 'guide'` giver en stiplet hjælpelinje, og `kind: 'shade'` giver en skygge (`tone`, `hatch`, `cross`, `sphere` eller `gradient`).
+- `kind: 'guide'` giver en stiplet hjælpelinje, og `kind: 'shade'` giver en skygge. Som standard er skyggen en flad
+  tone (styrke `tone` fra 0 til 1); `fill` kan i stedet være `soft` (blødt udtværet), `paper` (hvidt højlys oven på
+  skygge), `hatch`, `cross`, `sphere`, `gradient`, `fade-down` eller `fade-up`.
+- `weight` og `opacity` giver tyndere, tykkere eller lysere streger.
 - `erase` visker tidligere streger ud (efter `id`), og `'guides'` visker alle hjælpelinjer ud.
+- `style` er `'enkel'` (standard), `'detaljer'` eller `'naturtro'`. Udgaver af samme motiv deler `motif`.
+- `base: 'cat'` gør lektionen til en byg videre-lektion: den starter med den færdige kat, og `erase` kan viske
+  dens streger ud (giv dem et `id` i base-lektionen).
 - `labels` skriver små forklaringer på tegningen, fx "horisont".
 - Prik-til-prik laves med `dotLesson()` i `src/lessons/dots.ts`.
-- Hjælpefunktioner som `circle`, `ellipse`, `arc`, `mirrorX`, `hatch` og `intersect` ligger i `src/lessons/shapes.ts`.
+- Hjælpefunktioner som `circle`, `ellipse`, `arc`, `ellipseArc`, `mirrorX`, `hatch`, `intersect`, `ring` og
+  `goldenSpiral` ligger i `src/lessons/shapes.ts`.
 
-`npm test` fanger ugyldige stier, manglende oversættelser og streger, der viskes ud uden at være tegnet.
+`npm test` fanger ugyldige stier, manglende oversættelser, streger, der viskes ud uden at være tegnet, og
+byg videre-lektioner, der peger på en lektion, som ikke findes.
 
 ## Opbygning
 
