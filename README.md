@@ -1,5 +1,7 @@
 # Lær at tegne ✏️
 
+*A PWA that teaches you to draw in an interactive, guided way – with a pencil on paper.*
+
 En PWA (primært til tablets), hvor børn – og alle andre – lærer at tegne **med blyant på papir**.
 Skærmen er kun instruktør: den viser trin for trin, hvad der skal tegnes, og giver tips undervejs.
 
