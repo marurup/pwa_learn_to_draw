@@ -10,6 +10,9 @@ export const faceProportions: Lesson = {
   id: 'face-proportions',
   title: { da: 'Ansigt med rigtige proportioner', en: 'A face with real proportions' },
   category: 'mennesker',
+  sub: 'ansigter',
+  motif: 'face',
+  style: 'naturtro',
   level: 3,
   minutes: 20,
   intro: {

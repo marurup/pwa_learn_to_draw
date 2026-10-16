@@ -21,6 +21,7 @@ const sideBySide: Lesson = {
   id: 'styles-cat',
   title: { da: 'Tre stilarter: kat', en: 'Three styles: cat' },
   category: 'teknik',
+  style: 'detaljer',
   level: 4,
   minutes: 25,
   intro: {

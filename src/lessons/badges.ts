@@ -28,6 +28,8 @@ const RULES: Rule[] = [
   { id: 'perspective', icon: '📐', test: (done) => hasAll(done, ['perspective-1pt', 'perspective-2pt']) },
   { id: 'ten', icon: '🏅', test: (done) => done.length >= 10 },
   { id: 'allLevels', icon: '🌈', test: (done) => [1, 2, 3, 4].every((lv) => done.some((l) => l.level === lv)) },
+  { id: 'details', icon: '✨', test: (done) => done.filter((l) => l.style === 'detaljer').length >= 3 },
+  { id: 'realistic', icon: '🎨', test: (done) => done.filter((l) => l.style === 'naturtro').length >= 3 },
 ]
 
 export function computeBadges(profile: Profile, lessons: Lesson[]): Badge[] {

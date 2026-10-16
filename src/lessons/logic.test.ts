@@ -56,7 +56,7 @@ describe('shapes', () => {
   it('mirrors absolute paths around a vertical line', () => {
     expect(mirrorX('M10 20 L30 40 H50 V60', 100)).toBe('M190 20 L170 40 H150 V60')
     expect(mirrorX('M0 0 A5 5 0 0 1 10 0', 50)).toBe('M100 0 A5 5 0 0 0 90 0')
-    expect(() => mirrorX('m0 0 l1 1', 0)).toThrow()
+    expect(mirrorX('M10 10 l5 2 a3 3 0 0 1 6 0', 0)).toBe('M-10 10 l-5 2 a3 3 0 0 0 -6 0')
   })
 
   it('hatches inside the rectangle', () => {

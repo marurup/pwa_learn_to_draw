@@ -23,6 +23,7 @@ export const perspective1pt: Lesson = {
   id: 'perspective-1pt',
   title: { da: '1-punkts perspektiv: en vej', en: 'One-point perspective: a road' },
   category: 'teknik',
+  style: 'detaljer',
   level: 4,
   minutes: 20,
   intro: {

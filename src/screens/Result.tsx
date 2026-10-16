@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { StepCanvas } from '../components/StepCanvas'
-import { BadgeCelebration, Confetti, Toast, TopBar } from '../components/ui'
+import { BadgeCelebration, Confetti, NextChallenge, Toast, TopBar } from '../components/ui'
 import {
   BACKGROUNDS,
   BACKGROUND_CSS,
@@ -158,6 +158,8 @@ export function Result({ profile }: { profile: Profile }) {
               </p>
             </section>
           )}
+
+          <NextChallenge lesson={lesson} />
 
           <section className="card stack" style={{ gap: 10 }}>
             <h3>{t('result.howDidItGo')}</h3>

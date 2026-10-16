@@ -39,8 +39,8 @@ export const cat: Lesson = {
       strokes: [
         { d: ellipse(170, 146, 11, 15) },
         { d: ellipse(230, 146, 11, 15) },
-        { d: ellipse(171, 147, 4, 10), kind: 'shade', tone: 0.9 },
-        { d: ellipse(231, 147, 4, 10), kind: 'shade', tone: 0.9 },
+        { d: ellipse(171, 147, 4, 10), kind: 'shade', tone: 0.9, id: 'pupilL' },
+        { d: ellipse(231, 147, 4, 10), kind: 'shade', tone: 0.9, id: 'pupilR' },
         { d: 'M192 170 L208 170 L200 180 Z' },
         { d: 'M182 190 Q191 200 200 181 Q209 200 218 190' },
       ],

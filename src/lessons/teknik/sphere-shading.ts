@@ -12,6 +12,7 @@ export const sphereShading: Lesson = {
   id: 'sphere-shading',
   title: { da: 'Skygge på en kugle', en: 'Shading a sphere' },
   category: 'teknik',
+  style: 'naturtro',
   level: 4,
   minutes: 20,
   intro: {

@@ -7,6 +7,8 @@ export const happyFace: Lesson = {
   id: 'happy-face',
   title: { da: 'Glad ansigt', en: 'Happy face' },
   category: 'mennesker',
+  sub: 'ansigter',
+  motif: 'face',
   level: 2,
   minutes: 10,
   intro: {

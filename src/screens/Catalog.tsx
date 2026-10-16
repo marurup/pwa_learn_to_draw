@@ -1,8 +1,8 @@
 import { useSearchParams } from 'react-router-dom'
 import { LessonCard, TopBar } from '../components/ui'
 import { useT } from '../i18n'
-import { CATEGORIES, CATEGORY_ICON, LESSONS, SUBS } from '../lessons'
-import type { Category, Level, Sub } from '../lessons/types'
+import { CATEGORIES, CATEGORY_ICON, LESSONS, STYLE_ICON, SUBS, styleOf } from '../lessons'
+import { STYLES, type Category, type Level, type Style, type Sub } from '../lessons/types'
 import type { Profile } from '../state/store'
 
 export function Catalog({ profile }: { profile: Profile }) {
@@ -11,6 +11,7 @@ export function Catalog({ profile }: { profile: Profile }) {
   const cat = params.get('cat') as Category | null
   const sub = params.get('sub') as Sub | null
   const level = params.get('level') ? (Number(params.get('level')) as Level) : null
+  const style = params.get('style') as Style | null
 
   const set = (key: string, value: string | null) => {
     const next = new URLSearchParams(params)
@@ -21,7 +22,11 @@ export function Catalog({ profile }: { profile: Profile }) {
   }
 
   const lessons = LESSONS.filter(
-    (l) => (!cat || l.category === cat) && (!sub || l.sub === sub) && (!level || l.level === level),
+    (l) =>
+      (!cat || l.category === cat) &&
+      (!sub || l.sub === sub) &&
+      (!level || l.level === level) &&
+      (!style || styleOf(l) === style),
   )
   const subs = cat ? SUBS[cat] : undefined
 
@@ -59,6 +64,16 @@ export function Catalog({ profile }: { profile: Profile }) {
           {([1, 2, 3, 4] as Level[]).map((lv) => (
             <button key={lv} className="chip small" aria-pressed={level === lv} onClick={() => set('level', String(lv))}>
               {lv}. {t(`level.${lv}`)}
+            </button>
+          ))}
+        </div>
+        <div className="chips" role="toolbar">
+          <button className="chip small" aria-pressed={!style} onClick={() => set('style', null)}>
+            {t('catalog.allStyles')}
+          </button>
+          {STYLES.map((st) => (
+            <button key={st} className="chip small" aria-pressed={style === st} onClick={() => set('style', st)} data-testid={`style-${st}`}>
+              <span aria-hidden="true">{STYLE_ICON[st]}</span> {t(`style.${st}`)}
             </button>
           ))}
         </div>

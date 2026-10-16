@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import { composeStep, dotNumberPositions } from '../lessons/compose'
+import { composeStep, dotNumberPositions, type StrokeItem } from '../lessons/compose'
 import type { Lesson, Stroke } from '../lessons/types'
 import { useTL } from '../i18n'
 
@@ -29,6 +29,12 @@ function shadeFill(s: Stroke): { fill: string; fillOpacity?: number } {
       return { fill: 'url(#ltd-sphere)' }
     case 'gradient':
       return { fill: 'url(#ltd-gradient)' }
+    case 'fade-down':
+      return { fill: 'url(#ltd-fade-down)' }
+    case 'fade-up':
+      return { fill: 'url(#ltd-fade-up)' }
+    case 'paper':
+      return { fill: '#ffffff' }
     default:
       return { fill: '#3a3530', fillOpacity: s.tone ?? 0.3 }
   }
@@ -53,11 +59,30 @@ export function StepCanvas({ lesson, step = 0, mode = 'step', replayKey = 0, dot
   const dotR = mode === 'step' ? 5 : 6
   const numSize = mode === 'step' ? 15 : 18
 
-  // A shaded object sits on top of the shadow it casts, so sphere fills are painted last.
+  // Paint order: background gradients, blended (soft) tone, flat tone and hatching, sphere fills (an
+  // object sits on top of the shadow it casts), then white paper highlights.
+  const isShade = (s: StrokeItem) => s.stroke.kind === 'shade'
+  const layer = (s: StrokeItem) => {
+    const fill = s.stroke.fill
+    if (fill === 'gradient' || fill === 'fade-down' || fill === 'fade-up') return 0
+    return fill === 'paper' ? 3 : fill === 'sphere' ? 2 : 1
+  }
+  const backdrop = strokes.filter((s) => isShade(s) && layer(s) === 0)
+  const soft = strokes.filter((s) => isShade(s) && s.stroke.fill === 'soft')
   const shades = strokes
-    .filter((s) => s.stroke.kind === 'shade')
-    .sort((a, b) => Number(a.stroke.fill === 'sphere') - Number(b.stroke.fill === 'sphere'))
-  const lines = strokes.filter((s) => s.stroke.kind !== 'shade')
+    .filter((s) => isShade(s) && s.stroke.fill !== 'soft' && layer(s) > 0)
+    .sort((a, b) => layer(a) - layer(b))
+  const lines = strokes.filter((s) => !isShade(s))
+
+  const shadePath = ({ key, stroke, current }: StrokeItem) => (
+    <path
+      key={current ? `${key}-${replayKey}` : key}
+      d={stroke.d}
+      {...shadeFill(stroke)}
+      className={current && animate ? 'anim-fade' : undefined}
+      style={current && animate ? ({ '--delay': '0.2s' } as CSSProperties) : undefined}
+    />
+  )
 
   return (
     <svg
@@ -66,15 +91,9 @@ export function StepCanvas({ lesson, step = 0, mode = 'step', replayKey = 0, dot
       role="img"
       aria-label={label ?? tl(lesson.title)}
     >
-      {shades.map(({ key, stroke, current }) => (
-        <path
-          key={current ? `${key}-${replayKey}` : key}
-          d={stroke.d}
-          {...shadeFill(stroke)}
-          className={current && animate ? 'anim-fade' : undefined}
-          style={current && animate ? ({ '--delay': '0.2s' } as CSSProperties) : undefined}
-        />
-      ))}
+      {backdrop.map(shadePath)}
+      {soft.length > 0 && <g filter="url(#ltd-soft)">{soft.map(shadePath)}</g>}
+      {shades.map(shadePath)}
 
       {lines.map(({ key, stroke, current }) => {
         const guide = stroke.kind === 'guide'
@@ -88,6 +107,7 @@ export function StepCanvas({ lesson, step = 0, mode = 'step', replayKey = 0, dot
               .filter(Boolean)
               .join(' ')}
             strokeWidth={width}
+            strokeOpacity={stroke.opacity}
             pathLength={anim && !guide ? 1 : undefined}
             style={anim ? ({ '--delay': `${delayOf(key)}s`, '--dur': `${per}s` } as CSSProperties) : undefined}
           />
@@ -144,9 +164,20 @@ export function SvgDefs() {
         <pattern id="ltd-cross" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
           <path d="M0 0V8M0 0H8" stroke="#4a443e" strokeWidth="1.8" />
         </pattern>
+        <filter id="ltd-soft" filterUnits="userSpaceOnUse" x="-200" y="-200" width="1000" height="800">
+          <feGaussianBlur stdDeviation="4" />
+        </filter>
         <linearGradient id="ltd-gradient">
           <stop offset="0" stopColor="#3a3530" stopOpacity="0" />
           <stop offset="1" stopColor="#3a3530" stopOpacity="0.9" />
+        </linearGradient>
+        <linearGradient id="ltd-fade-down" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#3a3530" stopOpacity="0.6" />
+          <stop offset="1" stopColor="#3a3530" stopOpacity="0" />
+        </linearGradient>
+        <linearGradient id="ltd-fade-up" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#3a3530" stopOpacity="0" />
+          <stop offset="1" stopColor="#3a3530" stopOpacity="0.6" />
         </linearGradient>
         <radialGradient id="ltd-sphere" cx="0.38" cy="0.34" r="0.75" fx="0.33" fy="0.28">
           <stop offset="0" stopColor="#ffffff" />

@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 import { StepCanvas, canvasAspect } from '../components/StepCanvas'
-import { LevelDots, Materials, TopBar } from '../components/ui'
+import { LevelDots, Materials, StyleBadge, TopBar } from '../components/ui'
 import { useBack } from '../hooks/useBack'
 import { useT, useTL } from '../i18n'
+import { getLesson, styleOf, variantsOf } from '../lessons'
 import type { Lesson } from '../lessons/types'
 
 export function LessonIntro({ lesson }: { lesson: Lesson }) {
@@ -10,6 +11,8 @@ export function LessonIntro({ lesson }: { lesson: Lesson }) {
   const tl = useTL()
   const back = useBack('/catalog')
   const isDots = !!lesson.dots
+  const base = getLesson(lesson.base)
+  const variants = variantsOf(lesson)
 
   return (
     <main className="screen">
@@ -25,8 +28,23 @@ export function LessonIntro({ lesson }: { lesson: Lesson }) {
             <span>{t('level.label', { n: lesson.level, name: t(`level.${lesson.level}`) })}</span>
             <span>· {t('lesson.steps', { n: lesson.steps.length })}</span>
             <span>· {t('catalog.minutes', { n: lesson.minutes })}</span>
+            <StyleBadge style={styleOf(lesson)} />
           </p>
           <p className="lead">{tl(lesson.intro)}</p>
+          {base && (
+            <div className="builds-on" data-testid="builds-on">
+              <Link to={`/lesson/${base.id}`} className="mini-thumb" aria-label={tl(base.title)}>
+                <StepCanvas lesson={base} mode="thumb" />
+              </Link>
+              <div className="stack" style={{ gap: 6 }}>
+                <strong>{t('lesson.buildsOn', { title: tl(base.title) })}</strong>
+                <span className="muted">{t('lesson.buildsOnText')}</span>
+                <Link to={`/lesson/${base.id}`} className="link">
+                  {t('lesson.drawBaseFirst')} →
+                </Link>
+              </div>
+            </div>
+          )}
           <div>
             <h3>{t('lesson.youNeed')}</h3>
             <Materials lesson={lesson} />
@@ -46,6 +64,25 @@ export function LessonIntro({ lesson }: { lesson: Lesson }) {
               )}
             </div>
           </div>
+          {variants.length > 0 && (
+            <div className="stack" style={{ gap: 8 }}>
+              <h3>{t('lesson.otherVersions')}</h3>
+              <div className="variants">
+                {variants.map((v) => (
+                  <Link key={v.id} to={`/lesson/${v.id}`} className="variant" replace>
+                    <span className="mini-thumb">
+                      <StepCanvas lesson={v} mode="thumb" />
+                    </span>
+                    <span>
+                      {tl(v.title)}
+                      <br />
+                      <StyleBadge style={styleOf(v)} />
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </main>

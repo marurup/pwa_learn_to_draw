@@ -1,4 +1,4 @@
-import type { Category, Lesson, Sub } from './types'
+import type { Category, Lesson, Style, Sub } from './types'
 import { warmupLines } from './teknik/warmup-lines'
 import { dotsFish } from './prik/dots-fish'
 import { dotsStar } from './prik/dots-star'
@@ -7,6 +7,20 @@ import { dotsRocket } from './prik/dots-rocket'
 import { sunFlower } from './natur/sun-flower'
 import { happyFace } from './mennesker/happy-face'
 import { cat } from './dyr/cat'
+import { catDetail } from './dyr/cat-detail'
+import { cactus } from './natur/cactus'
+import { tulip } from './natur/tulip'
+import { sunflower } from './natur/sunflower'
+import { sunflowerDetail } from './natur/sunflower-detail'
+import { rose } from './natur/rose'
+import { roseReal } from './natur/rose-real'
+import { leaves } from './natur/leaves'
+import { flowerVase } from './natur/flower-vase'
+import { sunFlowerDetail } from './natur/sun-flower-detail'
+import { mountains } from './natur/mountains'
+import { beach } from './natur/beach'
+import { mountainDepth } from './natur/mountain-depth'
+import { sunsetSea } from './natur/sunset-sea'
 import { fish } from './dyr/fish'
 import { bird } from './dyr/bird'
 import { house } from './ting/house'
@@ -52,6 +66,20 @@ export const LESSONS: Lesson[] = [
   perspective1pt,
   perspective2pt,
   stylesCat,
+  catDetail,
+  cactus,
+  tulip,
+  sunflower,
+  sunflowerDetail,
+  rose,
+  roseReal,
+  leaves,
+  flowerVase,
+  sunFlowerDetail,
+  mountains,
+  beach,
+  mountainDepth,
+  sunsetSea,
 ]
 
 const byId = new Map(LESSONS.map((l) => [l.id, l]))
@@ -60,18 +88,45 @@ export function getLesson(id: string | undefined): Lesson | undefined {
   return id ? byId.get(id) : undefined
 }
 
-export const CATEGORIES: Category[] = ['prik', 'dyr', 'ting', 'mennesker', 'natur', 'teknik']
+export const CATEGORIES: Category[] = ['prik', 'dyr', 'natur', 'mennesker', 'ting', 'fantasi', 'teknik']
 
 export const SUBS: Partial<Record<Category, Sub[]>> = {
-  dyr: ['fugle', 'fisk', 'landdyr'],
+  dyr: ['fugle', 'fisk', 'landdyr', 'insekter'],
+  natur: ['blomster', 'landskab'],
+  mennesker: ['ansigter', 'krop'],
   ting: ['koeretoejer', 'bygninger', 'rummet'],
 }
 
 export const CATEGORY_ICON: Record<Category, string> = {
   prik: '🔢',
   dyr: '🐾',
-  ting: '🚗',
+  natur: '🌸',
   mennesker: '🙂',
-  natur: '🌳',
+  ting: '🚗',
+  fantasi: '🐉',
   teknik: '✏️',
+}
+
+export const STYLE_ICON: Record<Style, string> = { enkel: '✏️', detaljer: '✨', naturtro: '🎨' }
+
+export function styleOf(lesson: Lesson): Style {
+  return lesson.style ?? 'enkel'
+}
+
+/** The subject a lesson belongs to: its own motif, else its base lesson's, else its id. */
+export function motifOf(lesson: Lesson): string {
+  if (lesson.motif) return lesson.motif
+  const base = getLesson(lesson.base)
+  return base ? motifOf(base) : lesson.id
+}
+
+/** Lessons that continue on this lesson's finished drawing ("Byg videre"). */
+export function extensionsOf(id: string): Lesson[] {
+  return LESSONS.filter((l) => l.base === id)
+}
+
+/** Other lessons of the same subject, simplest first. */
+export function variantsOf(lesson: Lesson): Lesson[] {
+  const motif = motifOf(lesson)
+  return LESSONS.filter((l) => l.id !== lesson.id && motifOf(l) === motif).sort((a, b) => a.level - b.level)
 }
