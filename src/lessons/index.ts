@@ -46,6 +46,15 @@ import { sphereShading } from './teknik/sphere-shading'
 import { perspective1pt } from './teknik/perspective-1pt'
 import { perspective2pt } from './teknik/perspective-2pt'
 import { stylesCat } from './teknik/styles-cat'
+import { butterfly } from './dyr/butterfly'
+import { penguin } from './dyr/penguin'
+import { rabbit } from './dyr/rabbit'
+import { parrot } from './dyr/parrot'
+import { horse } from './dyr/horse'
+import { foxReal } from './dyr/fox-real'
+import { owlDetail } from './dyr/owl-detail'
+import { fishDetail } from './dyr/fish-detail'
+import { puppyDetail } from './dyr/puppy-detail'
 
 /** Every lesson, in the order they appear in the catalog (easiest first). */
 export const LESSONS: Lesson[] = [
@@ -96,6 +105,15 @@ export const LESSONS: Lesson[] = [
   faceProfile,
   hairstyles,
   portraitShaded,
+  butterfly,
+  penguin,
+  rabbit,
+  parrot,
+  horse,
+  foxReal,
+  owlDetail,
+  fishDetail,
+  puppyDetail,
 ]
 
 const byId = new Map(LESSONS.map((l) => [l.id, l]))
