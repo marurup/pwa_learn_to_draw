@@ -14,15 +14,21 @@ async function onboard(page: Page, lang: 'Dansk' | 'English' = 'Dansk', name = '
 }
 
 test('a child picks a drawing with help, draws it step by step and saves a photo', async ({ page }) => {
+  // Suggestions break ties at random; fix it so the cat is always among them.
+  await page.addInitScript(() => {
+    Math.random = () => 0
+  })
   await onboard(page)
   await expect(page.getByRole('heading', { name: 'Hej Ida!' })).toBeVisible()
 
-  // Guided choice.
+  // Guided choice: level, subject and style.
   await page.getByTestId('choose-help').click()
   await expect(page.getByTestId('level-2').getByText('Passer til din alder')).toBeVisible()
   await page.getByTestId('level-2').click()
   await page.getByTestId('interest-animals').click()
+  await page.getByTestId('style-enkel').click()
   await expect(page.getByRole('heading', { name: 'Prøv en af disse, Ida!' })).toBeVisible()
+  await expect(page.locator('.lesson-grid .lesson-card')).toHaveCount(3)
   await page.getByTestId('lesson-cat').click()
 
   // Lesson intro and player: forward, back and jumping between steps.
@@ -59,6 +65,35 @@ test('a child picks a drawing with help, draws it step by step and saves a photo
   await expect(page.getByRole('heading', { name: 'Idas galleri' })).toBeVisible()
   await expect(page.locator('.photo-card')).toHaveCount(1)
   await expect(page.locator('.badge.earned')).toHaveCount(2)
+})
+
+test('a finished drawing can be built on with more details', async ({ page }) => {
+  await onboard(page, 'Dansk', 'Ida', '9')
+  await page.goto('./#/lesson/cat/step/7')
+  await page.getByTestId('next-step').click()
+  await expect(page.getByRole('heading', { name: /Godt gået, Ida!/ })).toBeVisible()
+  await page.getByTestId('close-badges').click()
+  await page.getByTestId('next-challenge').getByRole('link', { name: /Gør den mere detaljeret/ }).click()
+
+  await expect(page.getByRole('heading', { name: 'Kat med pels og skygge' })).toBeVisible()
+  await expect(page.getByTestId('builds-on')).toContainText('Kat')
+  await page.getByTestId('start-lesson').click()
+  // The finished cat is already on the paper in grey, and only the new strokes are highlighted.
+  const canvas = page.locator('.step-canvas.step')
+  await expect(canvas.locator('.s-line.current').first()).toBeVisible()
+  expect(await canvas.locator('.s-line:not(.current)').count()).toBeGreaterThan(10)
+})
+
+test('the catalogue can be filtered by style, easiest first', async ({ page }) => {
+  await onboard(page, 'Dansk', 'Ida', '9')
+  await page.getByTestId('choose-know').click()
+  await page.getByTestId('cat-mennesker').click()
+  await page.getByTestId('style-naturtro').click()
+  const cards = page.locator('.lesson-grid .lesson-card')
+  await expect(cards).toHaveCount(4)
+  await expect(page.getByTestId('lesson-eye-real')).toBeVisible()
+  await expect(page.getByTestId('lesson-happy-face')).toHaveCount(0)
+  await expect(cards.last()).toHaveAttribute('data-testid', 'lesson-portrait-shaded')
 })
 
 test('the app works in English and remembers where you were', async ({ page }) => {

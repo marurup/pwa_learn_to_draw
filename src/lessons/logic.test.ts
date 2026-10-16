@@ -113,6 +113,21 @@ describe('recommend', () => {
   it('finds technique lessons for experienced artists', () => {
     recommend(LESSONS, 4, 'technique', none, 3, () => 0).forEach((l) => expect(l.category).toBe('teknik'))
   })
+
+  it('suggests the chosen style', () => {
+    const picks = recommend(LESSONS, 3, 'people', none, 3, () => 0, 'naturtro')
+    picks.forEach((l) => expect(l.style).toBe('naturtro'))
+    expect(picks.map((l) => l.id)).not.toContain('portrait-shaded') // builds on a face not drawn yet
+  })
+
+  it('waits with a "Byg videre" lesson until its base drawing is done', () => {
+    const simple: Lesson = { ...lesson, id: 'simple' }
+    const detail: Lesson = { ...lesson, id: 'detail', style: 'detaljer', base: 'simple' }
+    const harder: Lesson = { ...lesson, id: 'harder', style: 'detaljer', level: 4 }
+    const pick = (done: string[]) => recommend([simple, detail, harder], 2, 'animals', new Set(done), 1, () => 0, 'detaljer')[0].id
+    expect(pick([])).toBe('simple')
+    expect(pick(['simple'])).toBe('detail')
+  })
 })
 
 describe('badges', () => {
@@ -140,6 +155,13 @@ describe('badges', () => {
     const ids = earned(profile(['tone-scale', 'hatching', 'sphere-shading', 'perspective-1pt', 'perspective-2pt']))
     expect(ids).toContain('shading')
     expect(ids).toContain('perspective')
+  })
+
+  it('awards the detail and realistic badges after three lessons in that style', () => {
+    const some = earned(profile(['cat-detail', 'owl-detail', 'fish-detail', 'eye-real', 'nose-mouth']))
+    expect(some).toContain('details')
+    expect(some).not.toContain('realistic')
+    expect(earned(profile(['eye-real', 'nose-mouth', 'fox-real']))).toContain('realistic')
   })
 
   it('announces each badge once', () => {

@@ -21,13 +21,14 @@ export function Catalog({ profile }: { profile: Profile }) {
     setParams(next, { replace: true })
   }
 
+  // Easiest first; within a level the catalogue order keeps simple versions before their "Byg videre".
   const lessons = LESSONS.filter(
     (l) =>
       (!cat || l.category === cat) &&
       (!sub || l.sub === sub) &&
       (!level || l.level === level) &&
       (!style || styleOf(l) === style),
-  )
+  ).sort((a, b) => a.level - b.level)
   const subs = cat ? SUBS[cat] : undefined
 
   return (
