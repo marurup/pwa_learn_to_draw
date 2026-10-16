@@ -21,6 +21,14 @@ import { mountains } from './natur/mountains'
 import { beach } from './natur/beach'
 import { mountainDepth } from './natur/mountain-depth'
 import { sunsetSea } from './natur/sunset-sea'
+import { emotions } from './mennesker/emotions'
+import { happyFaceDetail } from './mennesker/happy-face-detail'
+import { figure } from './mennesker/figure'
+import { eyeReal } from './mennesker/eye-real'
+import { noseMouth } from './mennesker/nose-mouth'
+import { faceProfile } from './mennesker/face-profile'
+import { hairstyles } from './mennesker/hairstyles'
+import { portraitShaded } from './mennesker/portrait-shaded'
 import { fish } from './dyr/fish'
 import { bird } from './dyr/bird'
 import { house } from './ting/house'
@@ -80,6 +88,14 @@ export const LESSONS: Lesson[] = [
   beach,
   mountainDepth,
   sunsetSea,
+  emotions,
+  happyFaceDetail,
+  figure,
+  eyeReal,
+  noseMouth,
+  faceProfile,
+  hairstyles,
+  portraitShaded,
 ]
 
 const byId = new Map(LESSONS.map((l) => [l.id, l]))
