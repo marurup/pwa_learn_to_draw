@@ -4,13 +4,7 @@ export const da = {
 
   'common.next': 'Næste',
   'common.back': 'Tilbage',
-  'common.close': 'Luk',
-  'common.home': 'Forside',
-  'common.cancel': 'Annuller',
   'common.delete': 'Slet',
-  'common.save': 'Gem',
-  'common.yes': 'Ja',
-  'common.no': 'Nej',
 
   'welcome.hello': 'Hej! Lad os lære at tegne',
   'welcome.paper': 'Du tegner med blyant på papir. Skærmen viser dig, hvordan du gør – trin for trin.',
@@ -35,7 +29,6 @@ export const da = {
   'home.gallery': 'Mit galleri',
   'home.continue': 'Fortsæt',
   'home.switch': 'Skift tegner',
-  'home.parents': 'For voksne',
 
   'guide.q1': 'Hvor meget har du tegnet før?',
   'guide.l1': 'Jeg er helt ny',
@@ -97,7 +90,6 @@ export const da = {
   'player.read': 'Læs op',
   'player.stop': 'Stop',
   'player.finish': 'Færdig!',
-  'player.tip': 'Tip',
   'player.legendNew': 'Ny streg',
   'player.legendGuide': 'Hjælpelinje – tegn den let',
   'player.legendDone': 'Det har du tegnet',
@@ -118,7 +110,6 @@ export const da = {
   'photo.saving': 'Gemmer…',
   'photo.error': 'Billedet kunne ikke åbnes. Prøv igen.',
 
-  'result.mine': 'Din tegning',
   'result.original': 'Forlægget',
   'result.howDidItGo': 'Hvad synes du selv?',
   'result.pride.ok': 'Okay',
@@ -212,5 +203,4 @@ export const da = {
   'print.hint': 'Print på et almindeligt A4-ark. Forbind prikkerne i rækkefølge, og tegn så resten.',
   'print.hintSheet': 'Print på et almindeligt A4-ark, og tegn efter forlægget.',
 
-  'read.voiceMissing': 'Der er ingen dansk oplæserstemme på enheden.',
 } as const

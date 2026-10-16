@@ -18,7 +18,7 @@ export const happyFace: Lesson = {
     {
       text: { da: 'Tegn en stor oval til hovedet – lidt højere end den er bred.', en: 'Draw a big oval for the head – a little taller than it is wide.' },
       tip: { da: 'Tegn let i starten. Så er det nemt at rette.', en: 'Draw lightly at first. Then it is easy to fix.' },
-      strokes: [{ d: ellipse(200, 205, 122, 145) }],
+      strokes: [{ d: ellipse(200, 205, 122, 145), id: 'head' }],
     },
     {
       text: { da: 'Tegn to lette hjælpelinjer: en lodret ned gennem midten, og en vandret lige over midten.', en: 'Draw two light guide lines: one straight down the middle, and one across just above the middle.' },
@@ -52,8 +52,11 @@ export const happyFace: Lesson = {
     },
     {
       text: { da: 'Visk hjælpelinjerne ud, og tegn hår. Det må være krøllet, langt eller kort – som dit eget!', en: 'Erase the guide lines and draw hair. Curly, long or short – just like yours!' },
-      erase: 'guides',
-      strokes: [{ d: 'M80 168 Q82 70 200 60 Q318 70 320 168 Q300 118 258 122 Q236 96 200 110 Q166 94 144 122 Q102 116 80 168' }],
+      erase: ['g-v', 'g-h', 'head'],
+      strokes: [
+        { d: ellipseArc(200, 205, 122, 145, -14.8, 194.8) },
+        { d: 'M80 168 Q82 70 200 60 Q318 70 320 168 Q300 118 258 122 Q236 96 200 110 Q166 94 144 122 Q102 116 80 168' },
+      ],
     },
     {
       text: { da: 'Gør ansigtet ekstra glad med øjenbryn og runde kinder.', en: 'Make the face extra happy with eyebrows and round cheeks.' },

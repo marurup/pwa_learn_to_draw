@@ -104,3 +104,75 @@ export function mirrorX(d: string, cx: number): string {
   }
   return out.join(' ').replace(/([A-Z]) /g, '$1')
 }
+
+/** Parallel hatch lines at `angleDeg`, `spacing` apart, clipped to a rectangle. */
+export function hatch(x: number, y: number, w: number, h: number, spacing: number, angleDeg: number): string {
+  const a = (angleDeg * Math.PI) / 180
+  const [dx, dy] = [Math.cos(a), Math.sin(a)]
+  const [nx, ny] = [-dy, dx]
+  const [cx, cy] = [x + w / 2, y + h / 2]
+  const reach = Math.hypot(w, h) / 2
+  const segments: string[] = []
+  for (let s = -reach + spacing / 2; s < reach; s += spacing) {
+    const [px, py] = [cx + nx * s, cy + ny * s]
+    // Clip the infinite line p + t·d to the rectangle (Liang–Barsky).
+    let t0 = -Infinity
+    let t1 = Infinity
+    for (const [p, q] of [
+      [-dx, px - x],
+      [dx, x + w - px],
+      [-dy, py - y],
+      [dy, y + h - py],
+    ]) {
+      if (Math.abs(p) < 1e-9) {
+        if (q < 0) t1 = -Infinity
+        continue
+      }
+      const t = q / p
+      if (p < 0) t0 = Math.max(t0, t)
+      else t1 = Math.min(t1, t)
+    }
+    if (t1 - t0 > 2) segments.push(line(px + dx * t0, py + dy * t0, px + dx * t1, py + dy * t1))
+  }
+  return segments.join(' ')
+}
+
+/** Where the line a1→a2 crosses the line b1→b2. */
+export function intersect(a1: Pt, a2: Pt, b1: Pt, b2: Pt): Pt {
+  const d = (a1[0] - a2[0]) * (b1[1] - b2[1]) - (a1[1] - a2[1]) * (b1[0] - b2[0])
+  const ta = a1[0] * a2[1] - a1[1] * a2[0]
+  const tb = b1[0] * b2[1] - b1[1] * b2[0]
+  return [(ta * (b1[0] - b2[0]) - (a1[0] - a2[0]) * tb) / d, (ta * (b1[1] - b2[1]) - (a1[1] - a2[1]) * tb) / d]
+}
+
+/** Scales path data uniformly by `s` and moves it by (tx, ty). Handles absolute and relative commands. */
+export function transform(d: string, s: number, tx: number, ty: number): string {
+  const parts = d.match(/[A-Za-z][^A-Za-z]*/g) ?? []
+  return parts
+    .map((part) => {
+      const cmd = part[0]
+      const rel = cmd !== cmd.toUpperCase()
+      const nums = (part.slice(1).match(/-?\d*\.?\d+(?:e[-+]?\d+)?/gi) ?? []).map(Number)
+      const X = (v: number) => (rel ? v * s : v * s + tx)
+      const Y = (v: number) => (rel ? v * s : v * s + ty)
+      const out = nums.map((v, i) => {
+        switch (cmd.toUpperCase()) {
+          case 'H':
+            return X(v)
+          case 'V':
+            return Y(v)
+          case 'A': {
+            const k = i % 7
+            if (k === 0 || k === 1) return v * s
+            if (k === 5) return X(v)
+            if (k === 6) return Y(v)
+            return v
+          }
+          default:
+            return i % 2 === 0 ? X(v) : Y(v)
+        }
+      })
+      return cmd + out.map(n).join(' ')
+    })
+    .join(' ')
+}

@@ -27,6 +27,8 @@ function shadeFill(s: Stroke): { fill: string; fillOpacity?: number } {
       return { fill: 'url(#ltd-cross)' }
     case 'sphere':
       return { fill: 'url(#ltd-sphere)' }
+    case 'gradient':
+      return { fill: 'url(#ltd-gradient)' }
     default:
       return { fill: '#3a3530', fillOpacity: s.tone ?? 0.3 }
   }
@@ -51,7 +53,10 @@ export function StepCanvas({ lesson, step = 0, mode = 'step', replayKey = 0, dot
   const dotR = mode === 'step' ? 5 : 6
   const numSize = mode === 'step' ? 15 : 18
 
-  const shades = strokes.filter((s) => s.stroke.kind === 'shade')
+  // A shaded object sits on top of the shadow it casts, so sphere fills are painted last.
+  const shades = strokes
+    .filter((s) => s.stroke.kind === 'shade')
+    .sort((a, b) => Number(a.stroke.fill === 'sphere') - Number(b.stroke.fill === 'sphere'))
   const lines = strokes.filter((s) => s.stroke.kind !== 'shade')
 
   return (
@@ -122,6 +127,12 @@ export function StepCanvas({ lesson, step = 0, mode = 'step', replayKey = 0, dot
   )
 }
 
+/** Style for a card that shows this lesson's drawing, so the card has the drawing's proportions. */
+export function canvasAspect(lesson: Lesson): CSSProperties {
+  const [, , w, h] = (lesson.viewBox ?? '0 0 400 400').split(/\s+/).map(Number)
+  return { aspectRatio: `${w} / ${h}`, '--ar': w / h } as CSSProperties
+}
+
 /** Shared patterns and gradients, mounted once so every canvas can reference them. */
 export function SvgDefs() {
   return (
@@ -133,6 +144,10 @@ export function SvgDefs() {
         <pattern id="ltd-cross" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
           <path d="M0 0V8M0 0H8" stroke="#4a443e" strokeWidth="1.8" />
         </pattern>
+        <linearGradient id="ltd-gradient">
+          <stop offset="0" stopColor="#3a3530" stopOpacity="0" />
+          <stop offset="1" stopColor="#3a3530" stopOpacity="0.9" />
+        </linearGradient>
         <radialGradient id="ltd-sphere" cx="0.38" cy="0.34" r="0.75" fx="0.33" fy="0.28">
           <stop offset="0" stopColor="#ffffff" />
           <stop offset="0.25" stopColor="#d9d4cf" />

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { StepCanvas } from '../components/StepCanvas'
+import { StepCanvas, canvasAspect } from '../components/StepCanvas'
 import { TopBar } from '../components/ui'
 import { speechSupported, useSpeech } from '../hooks/useSpeech'
 import { useWakeLock } from '../hooks/useWakeLock'
@@ -77,7 +77,7 @@ export function LessonPlayer({ lesson, profile }: { lesson: Lesson; profile: Pro
               else prev()
             }
           }}
-          style={{ touchAction: 'pan-y' }}
+          style={{ touchAction: 'pan-y', ...canvasAspect(lesson) }}
         >
           <StepCanvas lesson={lesson} step={index} replayKey={replay} />
           <div className="legend" aria-hidden="true">

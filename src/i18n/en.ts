@@ -5,13 +5,7 @@ export const en: Dict = {
 
   'common.next': 'Next',
   'common.back': 'Back',
-  'common.close': 'Close',
-  'common.home': 'Home',
-  'common.cancel': 'Cancel',
   'common.delete': 'Delete',
-  'common.save': 'Save',
-  'common.yes': 'Yes',
-  'common.no': 'No',
 
   'welcome.hello': "Hi! Let's learn to draw",
   'welcome.paper': 'You draw with a pencil on paper. The screen shows you how – step by step.',
@@ -36,7 +30,6 @@ export const en: Dict = {
   'home.gallery': 'My gallery',
   'home.continue': 'Continue',
   'home.switch': 'Switch artist',
-  'home.parents': 'For grown-ups',
 
   'guide.q1': 'How much have you drawn before?',
   'guide.l1': "I'm brand new",
@@ -98,7 +91,6 @@ export const en: Dict = {
   'player.read': 'Read aloud',
   'player.stop': 'Stop',
   'player.finish': 'Done!',
-  'player.tip': 'Tip',
   'player.legendNew': 'New line',
   'player.legendGuide': 'Guide line – draw it lightly',
   'player.legendDone': "What you've drawn",
@@ -119,7 +111,6 @@ export const en: Dict = {
   'photo.saving': 'Saving…',
   'photo.error': "The picture couldn't be opened. Please try again.",
 
-  'result.mine': 'Your drawing',
   'result.original': 'The model',
   'result.howDidItGo': 'What do you think?',
   'result.pride.ok': 'Okay',
@@ -213,5 +204,4 @@ export const en: Dict = {
   'print.hint': 'Print on an ordinary A4 or letter sheet. Join the dots in order, then draw the rest.',
   'print.hintSheet': 'Print on an ordinary A4 or letter sheet and copy the model.',
 
-  'read.voiceMissing': 'There is no English voice on this device.',
 }

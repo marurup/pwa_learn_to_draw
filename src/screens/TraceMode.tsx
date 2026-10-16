@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { StepCanvas } from '../components/StepCanvas'
+import { StepCanvas, canvasAspect } from '../components/StepCanvas'
 import { HoldButton, TopBar } from '../components/ui'
 import { useWakeLock } from '../hooks/useWakeLock'
 import { useT, useTL } from '../i18n'
@@ -62,7 +62,7 @@ export function TraceMode({ lesson }: { lesson: Lesson }) {
     <main className="screen">
       <TopBar back={() => navigate(`/lesson/${lesson.id}`, { replace: true })} title={`${t('trace.title')}: ${tl(lesson.title)}`} />
       <div className="intro-layout">
-        <div className="card canvas-card">
+        <div className="card canvas-card" style={canvasAspect(lesson)}>
           <StepCanvas lesson={lesson} mode="trace" dotsOnly={dotsOnly} />
         </div>
         <div className="stack">

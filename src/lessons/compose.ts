@@ -30,11 +30,12 @@ export function composeStep(lesson: Lesson, stepIndex: number, final = false): C
 
   for (let i = 0; i <= upTo; i++) {
     const step = lesson.steps[i]
-    if (step.erase === 'guides') {
+    const ids = new Set(step.erase === 'guides' ? ['guides'] : (step.erase ?? []))
+    if (ids.has('guides')) {
       strokes = strokes.filter((s) => s.stroke.kind !== 'guide')
       labels = []
-    } else if (step.erase) {
-      const ids = new Set(step.erase)
+    }
+    if (ids.size) {
       strokes = strokes.filter((s) => !s.stroke.id || !ids.has(s.stroke.id))
       labels = labels.filter((l) => !l.label.id || !ids.has(l.label.id))
     }

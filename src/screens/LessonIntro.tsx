@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { StepCanvas } from '../components/StepCanvas'
+import { StepCanvas, canvasAspect } from '../components/StepCanvas'
 import { LevelDots, Materials, TopBar } from '../components/ui'
 import { useBack } from '../hooks/useBack'
 import { useT, useTL } from '../i18n'
@@ -15,7 +15,7 @@ export function LessonIntro({ lesson }: { lesson: Lesson }) {
     <main className="screen">
       <TopBar back={back} />
       <div className="intro-layout">
-        <div className="card canvas-card">
+        <div className="card canvas-card" style={canvasAspect(lesson)}>
           <StepCanvas lesson={lesson} mode="final" />
         </div>
         <div className="stack">

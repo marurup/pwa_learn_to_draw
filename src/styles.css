@@ -836,8 +836,13 @@ p {
 @media (orientation: portrait) {
   .canvas-card {
     max-height: 58dvh;
-    width: min(100%, 58dvh);
+    width: min(100%, calc(58dvh * var(--ar, 1)));
     justify-self: center;
+  }
+
+  .player .canvas-card {
+    max-height: 50dvh;
+    width: min(100%, calc(50dvh * var(--ar, 1)));
   }
 }
 

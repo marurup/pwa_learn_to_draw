@@ -23,7 +23,7 @@ export interface Stroke {
   /** Lets a later step erase this stroke. */
   id?: string
   /** Shade fill style. */
-  fill?: 'tone' | 'hatch' | 'cross' | 'sphere'
+  fill?: 'tone' | 'hatch' | 'cross' | 'sphere' | 'gradient'
   /** Darkness 0..1 for fill 'tone'. */
   tone?: number
   /** Line thickness multiplier (e.g. 1.6 for "press harder"). */
@@ -43,8 +43,8 @@ export interface Step {
   tip?: L10n
   strokes?: Stroke[]
   labels?: Label[]
-  /** Ids of earlier strokes/labels to rub out from this step on; 'guides' rubs out every guide. */
-  erase?: string[] | 'guides'
+  /** Ids of earlier strokes/labels to rub out from this step on; 'guides' rubs out every guide (and label). */
+  erase?: 'guides' | string[]
 }
 
 export interface Lesson {

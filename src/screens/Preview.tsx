@@ -6,7 +6,8 @@ import { LESSONS, getLesson } from '../lessons'
 export function Preview() {
   const { id } = useParams()
   const lesson = getLesson(id)
-  const cell = { width: 260, height: 260, background: '#fff', borderRadius: 12, padding: 6 }
+  const size = lesson ? 340 : 260
+  const cell = { width: size, height: size, background: '#fff', borderRadius: 12, padding: 6 }
   if (!lesson) {
     return (
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, padding: 12 }}>

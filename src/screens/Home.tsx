@@ -70,6 +70,13 @@ export function Home({ profile }: { profile: Profile }) {
           <span>{t('home.gallery')}</span>
         </Link>
       </div>
+
+      <p className="tip home-tip">
+        <span className="tip-icon" aria-hidden="true">
+          ✏️
+        </span>
+        <span>{t('welcome.paper')}</span>
+      </p>
     </main>
   )
 }
