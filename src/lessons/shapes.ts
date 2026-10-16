@@ -21,7 +21,6 @@ export function ellipse(cx: number, cy: number, rx: number, ry: number, rotateDe
   return `M${n(sx)} ${n(sy)} A${n(rx)} ${n(ry)} ${n(rotateDeg)} 1 1 ${n(ex)} ${n(ey)} A${n(rx)} ${n(ry)} ${n(rotateDeg)} 1 1 ${n(sx)} ${n(sy)}`
 }
 
-/** Circular arc from startDeg to endDeg (0° = right, 90° = down), clockwise when end > start. */
 /** A ring (a circle with a round hole), for shading around something round. */
 export function ring(cx: number, cy: number, outer: number, inner: number): string {
   return `${circle(cx, cy, outer)} M${n(cx - inner)} ${n(cy)} a${n(inner)} ${n(inner)} 0 1 0 ${n(2 * inner)} 0 a${n(inner)} ${n(inner)} 0 1 0 ${n(-2 * inner)} 0`
@@ -36,6 +35,7 @@ export function goldenSpiral(cx: number, cy: number, radius: number, count: numb
   })
 }
 
+/** Circular arc from startDeg to endDeg (0° = right, 90° = down), clockwise when end > start. */
 export function arc(cx: number, cy: number, r: number, startDeg: number, endDeg: number): string {
   return ellipseArc(cx, cy, r, r, startDeg, endDeg)
 }

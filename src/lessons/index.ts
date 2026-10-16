@@ -55,6 +55,16 @@ import { foxReal } from './dyr/fox-real'
 import { owlDetail } from './dyr/owl-detail'
 import { fishDetail } from './dyr/fish-detail'
 import { puppyDetail } from './dyr/puppy-detail'
+import { robot } from './fantasi/robot'
+import { unicorn } from './fantasi/unicorn'
+import { dragon } from './fantasi/dragon'
+import { airplane } from './ting/airplane'
+import { lighthouse } from './ting/lighthouse'
+import { castle } from './ting/castle'
+import { houseDetail } from './ting/house-detail'
+import { textures } from './teknik/textures'
+import { cylinderCone } from './teknik/cylinder-cone'
+import { appleStillLife } from './teknik/apple-still-life'
 
 /** Every lesson, in the order they appear in the catalog (easiest first). */
 export const LESSONS: Lesson[] = [
@@ -114,6 +124,16 @@ export const LESSONS: Lesson[] = [
   owlDetail,
   fishDetail,
   puppyDetail,
+  robot,
+  unicorn,
+  dragon,
+  airplane,
+  lighthouse,
+  castle,
+  houseDetail,
+  textures,
+  cylinderCone,
+  appleStillLife,
 ]
 
 const byId = new Map(LESSONS.map((l) => [l.id, l]))
