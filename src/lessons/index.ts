@@ -98,6 +98,22 @@ import { digger } from './ting/digger'
 import { diggerDetail } from './ting/digger-detail'
 import { tractor } from './ting/tractor'
 import { tractorDetail } from './ting/tractor-detail'
+import { birdDetail } from './dyr/bird-detail'
+import { carDetail } from './ting/car-detail'
+import { rocketDetail } from './ting/rocket-detail'
+import { treeDetail } from './natur/tree-detail'
+import { dolphinDetail } from './dyr/dolphin-detail'
+import { elephantReal } from './dyr/elephant-real'
+import { butterflyDetail } from './dyr/butterfly-detail'
+import { penguinDetail } from './dyr/penguin-detail'
+import { rabbitDetail } from './dyr/rabbit-detail'
+import { cactusDetail } from './natur/cactus-detail'
+import { tulipDetail } from './natur/tulip-detail'
+import { beachDetail } from './natur/beach-detail'
+import { airplaneDetail } from './ting/airplane-detail'
+import { lighthouseDetail } from './ting/lighthouse-detail'
+import { robotDetail } from './fantasi/robot-detail'
+import { unicornDetail } from './fantasi/unicorn-detail'
 
 /** Every lesson, in the order they appear in the catalog (easiest first). */
 export const LESSONS: Lesson[] = [
@@ -200,6 +216,22 @@ export const LESSONS: Lesson[] = [
   diggerDetail,
   tractor,
   tractorDetail,
+  birdDetail,
+  carDetail,
+  rocketDetail,
+  treeDetail,
+  dolphinDetail,
+  elephantReal,
+  butterflyDetail,
+  penguinDetail,
+  rabbitDetail,
+  cactusDetail,
+  tulipDetail,
+  beachDetail,
+  airplaneDetail,
+  lighthouseDetail,
+  robotDetail,
+  unicornDetail,
 ]
 
 const byId = new Map(LESSONS.map((l) => [l.id, l]))

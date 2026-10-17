@@ -80,6 +80,20 @@ describe('lesson catalogue', () => {
     expect(first.strokes.some((s) => s.current)).toBe(true)
   })
 
+  it('gives every simple drawing a more detailed or realistic version (see CLAUDE.md)', () => {
+    // Warm-ups and dot-to-dot are exercises, not motifs; these two are about expressions and poses.
+    const noVariant = new Set(['emotions', 'figure'])
+    const missing = LESSONS.filter(
+      (l) =>
+        styleOf(l) === 'enkel' &&
+        !['prik', 'teknik'].includes(l.category) &&
+        !noVariant.has(l.id) &&
+        !extensionsOf(l.id).length &&
+        !variantsOf(l).some((v) => styleOf(v) !== 'enkel'),
+    ).map((l) => l.id)
+    expect(missing).toEqual([])
+  })
+
   it('lets the dress-up doll change clothes: each outfit starts without the old dress', () => {
     for (const id of ['doll-princess', 'doll-ballerina', 'doll-mermaid']) {
       expect(extensionsOf('doll').map((l) => l.id)).toContain(id)

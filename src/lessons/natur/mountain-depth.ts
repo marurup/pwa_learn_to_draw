@@ -33,6 +33,7 @@ export const mountainDepth: Lesson = {
   sub: 'landskab',
   level: 3,
   style: 'detaljer',
+  motif: 'mountains',
   minutes: 20,
   intro: {
     da: 'Lær kunstnernes trick til dybde: Det, der er langt væk, er lyst, lille og uden detaljer. Det, der er tæt på, er mørkt, stort og detaljeret.',
