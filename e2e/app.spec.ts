@@ -180,3 +180,31 @@ test('it is an installable PWA that works offline', async ({ page, context, requ
   await expect(page.getByText('Trin 3 af 7')).toBeVisible()
   await context.setOffline(false)
 })
+
+test.describe('updates', () => {
+  // Keep the service worker out, so the tests can play the server that publishes version.json.
+  test.use({ serviceWorkers: 'block' })
+
+  test('the home screen shows which version is running and links to its commit', async ({ page }) => {
+    await onboard(page)
+    const info = page.getByTestId('app-info')
+    await expect(info.getByRole('link', { name: /^Version [0-9a-f]{7} · / })).toHaveAttribute(
+      'href',
+      /^https:\/\/github\.com\/.+\/commit\/[0-9a-f]{40}$/,
+    )
+    await info.getByRole('button', { name: 'Søg efter ny version' }).click()
+    await expect(info.getByRole('status')).toHaveText('Du har den nyeste version ✓')
+  })
+
+  test('a newer version is spotted and installed with one tap', async ({ page }) => {
+    await page.route('**/version.json', (route) =>
+      route.fulfill({ json: { sha: 'f'.repeat(40), date: '2030-01-01T00:00:00Z' } }),
+    )
+    await onboard(page)
+    const update = page.getByTestId('update')
+    await expect(update).toHaveText('Ny version klar – opdatér')
+    await expect(page.getByTestId('update-status')).toHaveText('Ny version: fffffff')
+    await Promise.all([page.waitForEvent('load'), update.click()])
+    await expect(page.getByRole('heading', { name: 'Hej Ida!' })).toBeVisible()
+  })
+})

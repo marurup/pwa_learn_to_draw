@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { AppInfo } from '../components/AppInfo'
 import { StepCanvas } from '../components/StepCanvas'
 import { HoldButton } from '../components/ui'
 import { useT, useTL } from '../i18n'
@@ -77,6 +78,8 @@ export function Home({ profile }: { profile: Profile }) {
         </span>
         <span>{t('welcome.paper')}</span>
       </p>
+
+      <AppInfo />
     </main>
   )
 }

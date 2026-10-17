@@ -49,6 +49,10 @@ Skærmen er kun instruktør: den viser trin for trin, hvad der skal tegnes, og g
   og "Festtegner".
 - **For voksne** (hold tandhjulet inde): sprog, tegnere, automatisk oplæsning, sletning af billeder og gode råd.
 - **Virker offline**, og alt bliver på enheden – ingen server og ingen tracking.
+- **Version og opdatering:** Nederst på forsiden står, hvilken version der kører (commit og dato, med link til
+  commit'en på GitHub). Appen tjekker selv, om der er udgivet en nyere version, når forsiden åbner, og når den
+  kommer frem igen. Så kommer knappen *Ny version klar – opdatér* frem. Man kan også selv trykke
+  *Søg efter ny version*.
 
 ## Kom i gang
 
@@ -76,6 +80,9 @@ Workflowet `.github/workflows/deploy.yml` bygger og udgiver appen ved hvert push
 **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
 Appen bruger relative stier og en hash-router, så den virker under `https://<bruger>.github.io/pwa_learn_to_draw/`.
+Hvert build får commit, dato og link til repoet indbygget (`vite.config.ts`) og en `version.json`, som ikke
+caches. Den installerede app sammenligner de to, og opdateringsknappen fjerner den gamle service worker og
+cache og henter appen forfra.
 Installér den på tabletten fra browseren: *Del → Føj til hjemmeskærm* (iPad) eller *Installer app* (Android/Chrome).
 
 ## Tilføj en ny tegning
