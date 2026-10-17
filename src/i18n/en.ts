@@ -31,6 +31,15 @@ export const en: Dict = {
   'home.continue': 'Continue',
   'home.switch': 'Switch artist',
 
+  'app.version': 'Version {sha} · {date}',
+  'app.devVersion': 'Development version',
+  'app.check': 'Check for a new version',
+  'app.checking': 'Checking …',
+  'app.latest': 'You have the latest version ✓',
+  'app.offline': 'Can’t check without the internet',
+  'app.update': 'New version ready – update',
+  'app.newer': 'New version: {sha}',
+
   'guide.q1': 'How much have you drawn before?',
   'guide.l1': "I'm brand new",
   'guide.l2': 'I can draw a little',

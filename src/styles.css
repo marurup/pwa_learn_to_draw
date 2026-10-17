@@ -614,7 +614,43 @@ p {
   }
 }
 
+.btn.small {
+  min-height: 44px;
+  padding: 8px 18px;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 0 var(--bg-dark);
+}
+
+.link-btn {
+  padding: 8px 4px;
+  border: 0;
+  background: none;
+  color: var(--sky-dark);
+  font: inherit;
+  text-decoration: underline;
+}
+
+.link-btn:disabled {
+  opacity: 0.6;
+}
+
 /* ---------- Misc ---------- */
+
+/* Version and update button at the bottom of the home screen. */
+.app-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 18px;
+  margin-top: auto;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.app-info .version {
+  color: inherit;
+}
 
 .tip {
   display: flex;

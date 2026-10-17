@@ -30,6 +30,15 @@ export const da = {
   'home.continue': 'Fortsæt',
   'home.switch': 'Skift tegner',
 
+  'app.version': 'Version {sha} · {date}',
+  'app.devVersion': 'Udviklingsversion',
+  'app.check': 'Søg efter ny version',
+  'app.checking': 'Søger …',
+  'app.latest': 'Du har den nyeste version ✓',
+  'app.offline': 'Kan ikke søge uden internet',
+  'app.update': 'Ny version klar – opdatér',
+  'app.newer': 'Ny version: {sha}',
+
   'guide.q1': 'Hvor meget har du tegnet før?',
   'guide.l1': 'Jeg er helt ny',
   'guide.l2': 'Jeg kan tegne lidt',
