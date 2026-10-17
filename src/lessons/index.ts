@@ -173,6 +173,23 @@ import { buggy } from './spil/buggy'
 import { buggyDetail } from './spil/buggy-detail'
 import { rocketCar } from './spil/rocket-car'
 import { rocketCarDetail } from './spil/rocket-car-detail'
+import { icePrincess } from './fantasi/ice-princess'
+import { icePrincessDetail } from './fantasi/ice-princess-detail'
+import { icePrincessReal } from './fantasi/ice-princess-real'
+import { princessSister } from './fantasi/princess-sister'
+import { princessSisterDetail } from './fantasi/princess-sister-detail'
+import { snowFriend } from './fantasi/snow-friend'
+import { snowFriendDetail } from './fantasi/snow-friend-detail'
+import { iceCastle } from './fantasi/ice-castle'
+import { iceCastleDetail } from './fantasi/ice-castle-detail'
+import { spaceKnight } from './fantasi/space-knight'
+import { spaceKnightDetail } from './fantasi/space-knight-detail'
+import { darkKnight } from './fantasi/dark-knight'
+import { darkKnightDetail } from './fantasi/dark-knight-detail'
+import { domeRobot } from './fantasi/dome-robot'
+import { domeRobotDetail } from './fantasi/dome-robot-detail'
+import { starFighter } from './fantasi/star-fighter'
+import { starFighterDetail } from './fantasi/star-fighter-detail'
 
 /** Every lesson, in the order they appear in the catalog (easiest first). */
 export const LESSONS: Lesson[] = [
@@ -350,6 +367,23 @@ export const LESSONS: Lesson[] = [
   buggyDetail,
   rocketCar,
   rocketCarDetail,
+  icePrincess,
+  icePrincessDetail,
+  icePrincessReal,
+  princessSister,
+  princessSisterDetail,
+  snowFriend,
+  snowFriendDetail,
+  iceCastle,
+  iceCastleDetail,
+  spaceKnight,
+  spaceKnightDetail,
+  darkKnight,
+  darkKnightDetail,
+  domeRobot,
+  domeRobotDetail,
+  starFighter,
+  starFighterDetail,
 ]
 
 const byId = new Map(LESSONS.map((l) => [l.id, l]))
@@ -365,7 +399,7 @@ export const SUBS: Partial<Record<Category, Sub[]>> = {
   natur: ['blomster', 'landskab'],
   mennesker: ['ansigter', 'krop', 'dukker'],
   ting: ['koeretoejer', 'maskiner', 'bygninger', 'rummet'],
-  fantasi: ['havfruer', 'eventyr'],
+  fantasi: ['havfruer', 'isriget', 'rumeventyr', 'eventyr'],
   hoejtider: ['halloween', 'jul', 'nytaar', 'hjerter', 'fastelavn', 'paaske', 'sankthans', 'foedselsdag'],
   spil: ['blokke', 'spilfigurer', 'raketbiler'],
 }
