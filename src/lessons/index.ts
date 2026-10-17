@@ -123,6 +123,20 @@ import { ghost } from './hoejtider/ghost'
 import { ghostDetail } from './hoejtider/ghost-detail'
 import { hauntedHouse } from './hoejtider/haunted-house'
 import { hauntedHouseDetail } from './hoejtider/haunted-house-detail'
+import { christmasTree } from './hoejtider/christmas-tree'
+import { christmasTreeDetail } from './hoejtider/christmas-tree-detail'
+import { santa } from './hoejtider/santa'
+import { santaDetail } from './hoejtider/santa-detail'
+import { reindeer } from './hoejtider/reindeer'
+import { reindeerDetail } from './hoejtider/reindeer-detail'
+import { sleigh } from './hoejtider/sleigh'
+import { sleighDetail } from './hoejtider/sleigh-detail'
+import { gift } from './hoejtider/gift'
+import { giftDetail } from './hoejtider/gift-detail'
+import { snowman } from './hoejtider/snowman'
+import { snowmanDetail } from './hoejtider/snowman-detail'
+import { nisse } from './hoejtider/nisse'
+import { nisseDetail } from './hoejtider/nisse-detail'
 
 /** Every lesson, in the order they appear in the catalog (easiest first). */
 export const LESSONS: Lesson[] = [
@@ -250,6 +264,20 @@ export const LESSONS: Lesson[] = [
   ghostDetail,
   hauntedHouse,
   hauntedHouseDetail,
+  christmasTree,
+  christmasTreeDetail,
+  santa,
+  santaDetail,
+  reindeer,
+  reindeerDetail,
+  sleigh,
+  sleighDetail,
+  gift,
+  giftDetail,
+  snowman,
+  snowmanDetail,
+  nisse,
+  nisseDetail,
 ]
 
 const byId = new Map(LESSONS.map((l) => [l.id, l]))
@@ -266,7 +294,7 @@ export const SUBS: Partial<Record<Category, Sub[]>> = {
   mennesker: ['ansigter', 'krop', 'dukker'],
   ting: ['koeretoejer', 'maskiner', 'bygninger', 'rummet'],
   fantasi: ['havfruer', 'eventyr'],
-  hoejtider: ['halloween'],
+  hoejtider: ['halloween', 'jul'],
 }
 
 export const CATEGORY_ICON: Record<Category, string> = {
