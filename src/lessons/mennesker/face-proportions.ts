@@ -10,6 +10,9 @@ export const faceProportions: Lesson = {
   id: 'face-proportions',
   title: { da: 'Ansigt med rigtige proportioner', en: 'A face with real proportions' },
   category: 'mennesker',
+  sub: 'ansigter',
+  motif: 'face',
+  style: 'naturtro',
   level: 3,
   minutes: 20,
   intro: {
@@ -56,8 +59,8 @@ export const faceProportions: Lesson = {
         { d: circle(242, 204, 9), kind: 'shade', tone: 0.6 },
         { d: circle(158, 204, 4), kind: 'shade', tone: 1 },
         { d: circle(242, 204, 4), kind: 'shade', tone: 1 },
-        { d: browL },
-        { d: mirrorX(browL, 200) },
+        { d: browL, id: 'browL' },
+        { d: mirrorX(browL, 200), id: 'browR' },
       ],
     },
     {

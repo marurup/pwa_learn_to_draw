@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { CATEGORIES, LESSONS, SUBS, getLesson } from './index'
+import { CATEGORIES, LESSONS, SUBS, extensionsOf, getLesson, motifOf, styleOf, variantsOf } from './index'
 import { composeStep } from './compose'
 import type { L10n, Lesson } from './types'
 
@@ -48,6 +48,38 @@ describe('lesson catalogue', () => {
     for (const subs of Object.values(SUBS)) for (const sub of subs ?? []) expect(LESSONS.some((l) => l.sub === sub)).toBe(true)
   })
 
+  it('builds only on lessons that exist, without going in circles', () => {
+    for (const lesson of LESSONS) {
+      const seen = new Set([lesson.id])
+      let next = lesson.base
+      while (next) {
+        const base = getLesson(next)
+        expect(base, `${lesson.id} builds on unknown "${next}"`).toBeDefined()
+        expect(seen.has(next), `${lesson.id} builds on itself`).toBe(false)
+        seen.add(next)
+        next = base?.base
+      }
+    }
+  })
+
+  it('links "Byg videre" lessons to their base and to the same motif', () => {
+    const detail = getLesson('cat-detail')!
+    expect(extensionsOf('cat')).toContain(detail)
+    expect(motifOf(detail)).toBe('cat')
+    expect(variantsOf(getLesson('cat')!)).toContain(detail)
+    expect(styleOf(getLesson('cat')!)).toBe('enkel')
+    expect(styleOf(detail)).toBe('detaljer')
+  })
+
+  it('starts a "Byg videre" lesson with the finished base drawing, already drawn', () => {
+    const detail = getLesson('cat-detail')!
+    const first = composeStep(detail, 0)
+    const baseFinal = composeStep(getLesson('cat')!, 0, true)
+    const old = first.strokes.filter((s) => !s.current)
+    expect(old.length).toBe(baseFinal.strokes.length - 2) // the two simple pupils are rubbed out
+    expect(first.strokes.some((s) => s.current)).toBe(true)
+  })
+
   it('finds lessons by id', () => {
     expect(getLesson('cat')?.id).toBe('cat')
     expect(getLesson('nope')).toBeUndefined()
@@ -74,8 +106,9 @@ describe.each(LESSONS.map((l) => [l.id, l] as const))('lesson %s', (_, lesson) =
     )
   })
 
-  it('only erases strokes that were drawn in an earlier step', () => {
-    const seen = new Set<string>()
+  it('only erases strokes that were drawn in an earlier step (or in the drawing it builds on)', () => {
+    const base = getLesson(lesson.base)
+    const seen = new Set<string>(base ? composeStep(base, 0, true).strokes.flatMap((s) => (s.stroke.id ? [s.stroke.id] : [])) : [])
     lesson.steps.forEach((step, i) => {
       if (Array.isArray(step.erase)) {
         for (const id of step.erase) if (id !== 'guides') expect(seen.has(id), `step ${i + 1} erases "${id}"`).toBe(true)

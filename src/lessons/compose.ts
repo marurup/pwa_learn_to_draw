@@ -1,3 +1,4 @@
+import { getLesson } from './index'
 import type { Label, Lesson, Stroke } from './types'
 
 export interface StrokeItem {
@@ -21,11 +22,20 @@ export interface Composition {
 /**
  * Everything visible on the paper at `stepIndex`: strokes from earlier steps (minus the ones rubbed
  * out) plus the strokes of this step. `final` shows the finished drawing without guides or labels.
+ * A lesson with a `base` starts from that lesson's finished drawing.
  */
-export function composeStep(lesson: Lesson, stepIndex: number, final = false): Composition {
+export function composeStep(
+  lesson: Lesson,
+  stepIndex: number,
+  final = false,
+  resolve: (id: string) => Lesson | undefined = getLesson,
+): Composition {
   const last = lesson.steps.length - 1
   const upTo = final ? last : Math.max(0, Math.min(stepIndex, last))
-  let strokes: StrokeItem[] = []
+  const base = lesson.base ? resolve(lesson.base) : undefined
+  let strokes: StrokeItem[] = base
+    ? composeStep(base, 0, true, resolve).strokes.map((s) => ({ ...s, key: `b${s.key}`, current: false }))
+    : []
   let labels: LabelItem[] = []
 
   for (let i = 0; i <= upTo; i++) {

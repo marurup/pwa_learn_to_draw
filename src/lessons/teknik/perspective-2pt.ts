@@ -20,6 +20,7 @@ export const perspective2pt: Lesson = {
   id: 'perspective-2pt',
   title: { da: '2-punkts perspektiv: en kasse', en: 'Two-point perspective: a box' },
   category: 'teknik',
+  style: 'detaljer',
   level: 4,
   minutes: 25,
   intro: {

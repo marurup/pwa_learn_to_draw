@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useT, useTL } from '../i18n'
-import { LESSONS } from '../lessons'
+import { LESSONS, STYLE_ICON, extensionsOf, styleOf, variantsOf } from '../lessons'
 import { newBadges, type Badge } from '../lessons/badges'
-import type { Lesson, Level } from '../lessons/types'
+import type { Lesson, Level, Style } from '../lessons/types'
 import { actions, type Profile } from '../state/store'
 import { StepCanvas } from './StepCanvas'
 
@@ -38,15 +38,26 @@ export function LevelDots({ level }: { level: Level }) {
   )
 }
 
+export function StyleBadge({ style }: { style: Style }) {
+  const t = useT()
+  return (
+    <span className={`style-badge ${style}`}>
+      <span aria-hidden="true">{STYLE_ICON[style]}</span> {t(`style.${style}`)}
+    </span>
+  )
+}
+
 export function LessonCard({ lesson, done }: { lesson: Lesson; done?: boolean }) {
   const t = useT()
   const tl = useTL()
+  const style = styleOf(lesson)
   return (
     <Link to={`/lesson/${lesson.id}`} className="lesson-card" data-testid={`lesson-${lesson.id}`}>
       <div className="thumb">
         <StepCanvas lesson={lesson} mode="thumb" />
       </div>
       {done && <span className="done-mark">✓ {t('catalog.done')}</span>}
+      {style !== 'enkel' && <StyleBadge style={style} />}
       <h3>{tl(lesson.title)}</h3>
       <div className="meta">
         <LevelDots level={lesson.level} />
@@ -199,5 +210,35 @@ export function BadgeCelebration({ profile }: { profile: Profile }) {
         </button>
       </div>
     </div>
+  )
+}
+
+/**
+ * After a drawing: carry on with more details on the same paper, or try the realistic version of the
+ * same subject (only versions that do not first need another drawing).
+ */
+export function NextChallenge({ lesson }: { lesson: Lesson }) {
+  const t = useT()
+  const tl = useTL()
+  const more = extensionsOf(lesson.id)
+  const realistic =
+    styleOf(lesson) === 'naturtro' ? [] : variantsOf(lesson).filter((v) => styleOf(v) === 'naturtro' && !v.base)
+  const options = [...more, ...realistic.slice(0, 2)]
+  if (!options.length) return null
+  return (
+    <section className="next-challenge card" data-testid="next-challenge">
+      <h3>{t('next.title')}</h3>
+      <div className="row">
+        {options.map((l) => {
+          const real = styleOf(l) === 'naturtro'
+          return (
+            <Link key={l.id} to={`/lesson/${l.id}`} className={`btn ${real ? 'sky' : 'sun'}`}>
+              {real ? `🎨 ${t('next.realistic')}` : `✨ ${t('next.detail')}`}
+              {options.length > 1 ? `: ${tl(l.title)}` : ''}
+            </Link>
+          )
+        })}
+      </div>
+    </section>
   )
 }

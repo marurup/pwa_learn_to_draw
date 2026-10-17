@@ -17,6 +17,7 @@ export const sunFlower: Lesson = {
   id: 'sun-flower',
   title: { da: 'Sol og blomst', en: 'Sun and flower' },
   category: 'natur',
+  sub: 'blomster',
   level: 1,
   minutes: 8,
   intro: {

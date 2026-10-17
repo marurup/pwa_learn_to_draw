@@ -1,7 +1,7 @@
 import { useRef, type ChangeEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { StepCanvas } from '../components/StepCanvas'
-import { BadgeCelebration, Confetti } from '../components/ui'
+import { BadgeCelebration, Confetti, NextChallenge } from '../components/ui'
 import { useT } from '../i18n'
 import type { Lesson } from '../lessons/types'
 import { setPendingPhoto } from '../state/pending'
@@ -42,6 +42,7 @@ export function LessonDone({ lesson, profile }: { lesson: Lesson; profile: Profi
       </div>
       <input ref={cameraInput} type="file" accept="image/*" capture="environment" hidden onChange={onFile} data-testid="photo-input" />
       <input ref={fileInput} type="file" accept="image/*" hidden onChange={onFile} />
+      <NextChallenge lesson={lesson} />
       <div className="row center">
         <Link to={`/lesson/${lesson.id}/step/1`} className="btn soft" replace>
           ↻ {t('done.again')}

@@ -3,17 +3,19 @@ import { Link, useNavigate } from 'react-router-dom'
 import { StepCanvas } from '../components/StepCanvas'
 import { LessonCard, TopBar } from '../components/ui'
 import { useT, type Key } from '../i18n'
-import { LESSONS, getLesson } from '../lessons'
+import { LESSONS, getLesson, styleOf } from '../lessons'
 import { INTERESTS, levelForAge, recommend, type Interest } from '../lessons/recommend'
-import type { Level } from '../lessons/types'
+import { STYLES, type Level, type Style } from '../lessons/types'
 import type { Profile } from '../state/store'
 
 const LEVEL_EXAMPLE: Record<Level, string> = { 1: 'dots-fish', 2: 'cat', 3: 'owl', 4: 'sphere-shading' }
+const STYLE_EXAMPLE: Record<Style, string> = { enkel: 'cat', detaljer: 'cat-detail', naturtro: 'eye-real' }
 const INTEREST_ICON: Record<Interest, string> = {
   animals: '🐾',
-  vehicles: '🚀',
-  homes: '🏡',
+  flowers: '🌸',
   people: '🙂',
+  things: '🚀',
+  fantasy: '🐉',
   technique: '🌗',
   surprise: '🎁',
 }
@@ -23,6 +25,7 @@ export function Guide({ profile }: { profile: Profile }) {
   const navigate = useNavigate()
   const [level, setLevel] = useState<Level | undefined>()
   const [interest, setInterest] = useState<Interest | undefined>()
+  const [style, setStyle] = useState<Style | undefined>()
   const ageLevel = levelForAge(profile.age)
 
   const completed = useMemo(
@@ -30,12 +33,13 @@ export function Guide({ profile }: { profile: Profile }) {
     [profile.progress],
   )
   const picks = useMemo(
-    () => (level && interest ? recommend(LESSONS, level, interest, completed) : []),
-    [level, interest, completed],
+    () => (level && interest && style ? recommend(LESSONS, level, interest, completed, 3, Math.random, style) : []),
+    [level, interest, style, completed],
   )
 
   const back = () => {
-    if (interest) setInterest(undefined)
+    if (style) setStyle(undefined)
+    else if (interest) setInterest(undefined)
     else if (level) setLevel(undefined)
     else navigate('/home')
   }
@@ -82,7 +86,28 @@ export function Guide({ profile }: { profile: Profile }) {
         </section>
       )}
 
-      {level && interest && (
+      {level && interest && !style && (
+        <section className="stack">
+          <h1>{t('guide.q3')}</h1>
+          <div className="choice-grid">
+            {STYLES.map((st) => {
+              const example = getLesson(STYLE_EXAMPLE[st]) ?? LESSONS.find((l) => styleOf(l) === st)
+              return (
+                <button key={st} className="choice" onClick={() => setStyle(st)} data-testid={`style-${st}`}>
+                  {example && (
+                    <span className="thumbs">
+                      <StepCanvas lesson={example} mode="thumb" />
+                    </span>
+                  )}
+                  {t(`guide.s.${st}` as Key)}
+                </button>
+              )
+            })}
+          </div>
+        </section>
+      )}
+
+      {level && interest && style && (
         <section className="stack">
           <h1>{t('guide.result', { name: profile.name })}</h1>
           <div className="lesson-grid">

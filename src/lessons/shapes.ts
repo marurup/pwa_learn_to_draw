@@ -21,6 +21,20 @@ export function ellipse(cx: number, cy: number, rx: number, ry: number, rotateDe
   return `M${n(sx)} ${n(sy)} A${n(rx)} ${n(ry)} ${n(rotateDeg)} 1 1 ${n(ex)} ${n(ey)} A${n(rx)} ${n(ry)} ${n(rotateDeg)} 1 1 ${n(sx)} ${n(sy)}`
 }
 
+/** A ring (a circle with a round hole), for shading around something round. */
+export function ring(cx: number, cy: number, outer: number, inner: number): string {
+  return `${circle(cx, cy, outer)} M${n(cx - inner)} ${n(cy)} a${n(inner)} ${n(inner)} 0 1 0 ${n(2 * inner)} 0 a${n(inner)} ${n(inner)} 0 1 0 ${n(-2 * inner)} 0`
+}
+
+/** Points along a golden-angle (Fermat) spiral – the way seeds sit in a sunflower. */
+export function goldenSpiral(cx: number, cy: number, radius: number, count: number): Pt[] {
+  const golden = Math.PI * (3 - Math.sqrt(5))
+  return Array.from({ length: count }, (_, i) => {
+    const r = radius * Math.sqrt((i + 0.5) / count)
+    return [cx + r * Math.cos(i * golden), cy + r * Math.sin(i * golden)]
+  })
+}
+
 /** Circular arc from startDeg to endDeg (0° = right, 90° = down), clockwise when end > start. */
 export function arc(cx: number, cy: number, r: number, startDeg: number, endDeg: number): string {
   return ellipseArc(cx, cy, r, r, startDeg, endDeg)
@@ -71,38 +85,37 @@ export function roundRect(x: number, y: number, w: number, h: number, r: number)
   ].join(' ')
 }
 
-/** Mirror path data horizontally around x = cx (only absolute commands M L Q C A H V Z are supported). */
+/** Mirror path data horizontally around x = cx (commands M L Q C S T A H V Z, absolute or relative). */
 export function mirrorX(d: string, cx: number): string {
   const tokens = d.match(/[A-Za-z]|-?\d*\.?\d+(?:e[-+]?\d+)?/g) ?? []
   const out: string[] = []
   let cmd = ''
-  let i = 0
+  let rel = false
   let argIdx = 0
   const arity: Record<string, number> = { M: 2, L: 2, Q: 4, C: 6, A: 7, H: 1, V: 1, Z: 0, T: 2, S: 4 }
-  while (i < tokens.length) {
-    const t = tokens[i]
+  tokens.forEach((t, i) => {
     if (/[A-Za-z]/.test(t)) {
-      if (t !== t.toUpperCase()) throw new Error(`mirrorX supports absolute commands only, got ${t}`)
-      cmd = t
+      cmd = t.toUpperCase()
+      // A path's first "m" is absolute.
+      rel = t !== cmd && !(i === 0 && cmd === 'M')
       argIdx = 0
       out.push(t)
-      i++
-      continue
+      return
     }
     const v = Number(t)
+    const x = () => (rel ? -v : 2 * cx - v)
     const pos = argIdx % (arity[cmd] || 1)
     let mirrored = v
-    if (cmd === 'H') mirrored = 2 * cx - v
+    if (cmd === 'H') mirrored = x()
     else if (cmd === 'A') {
       if (pos === 4) mirrored = v === 1 ? 0 : 1 // sweep flag flips
-      else if (pos === 5) mirrored = 2 * cx - v
+      else if (pos === 5) mirrored = x()
       else if (pos === 2) mirrored = -v
-    } else if (cmd !== 'V' && pos % 2 === 0) mirrored = 2 * cx - v
+    } else if (cmd !== 'V' && pos % 2 === 0) mirrored = x()
     out.push(n(mirrored))
     argIdx++
-    i++
-  }
-  return out.join(' ').replace(/([A-Z]) /g, '$1')
+  })
+  return out.join(' ').replace(/([A-Za-z]) /g, '$1')
 }
 
 /** Parallel hatch lines at `angleDeg`, `spacing` apart, clipped to a rectangle. */

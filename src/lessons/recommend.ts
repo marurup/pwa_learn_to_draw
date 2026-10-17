@@ -1,7 +1,7 @@
-import type { Lesson, Level } from './types'
+import type { Lesson, Level, Style } from './types'
 
-export type Interest = 'animals' | 'vehicles' | 'homes' | 'people' | 'technique' | 'surprise'
-export const INTERESTS: Interest[] = ['animals', 'vehicles', 'homes', 'people', 'technique', 'surprise']
+export type Interest = 'animals' | 'flowers' | 'people' | 'things' | 'fantasy' | 'technique' | 'surprise'
+export const INTERESTS: Interest[] = ['animals', 'flowers', 'people', 'things', 'fantasy', 'technique', 'surprise']
 
 export function levelForAge(age: number): Level {
   if (age <= 5) return 1
@@ -13,13 +13,15 @@ export function levelForAge(age: number): Level {
 export function matchesInterest(lesson: Lesson, interest: Interest): boolean {
   switch (interest) {
     case 'animals':
-      return lesson.category === 'dyr' || ['fugle', 'fisk', 'landdyr'].includes(lesson.sub ?? '')
-    case 'vehicles':
-      return lesson.sub === 'koeretoejer' || lesson.sub === 'rummet'
-    case 'homes':
-      return lesson.sub === 'bygninger' || lesson.category === 'natur'
+      return lesson.category === 'dyr' || ['fugle', 'fisk', 'landdyr', 'insekter'].includes(lesson.sub ?? '')
+    case 'flowers':
+      return lesson.category === 'natur'
     case 'people':
       return lesson.category === 'mennesker'
+    case 'things':
+      return lesson.category === 'ting' || ['koeretoejer', 'bygninger', 'rummet'].includes(lesson.sub ?? '')
+    case 'fantasy':
+      return lesson.category === 'fantasi'
     case 'technique':
       return lesson.category === 'teknik'
     case 'surprise':
@@ -28,8 +30,9 @@ export function matchesInterest(lesson: Lesson, interest: Interest): boolean {
 }
 
 /**
- * Picks `count` lessons for a level and interest: matching lessons first, closest level first,
- * lessons not yet drawn before ones already drawn. `random` breaks ties (and drives "surprise me").
+ * Picks `count` lessons for a level, interest and (optionally) style: matching lessons first, closest
+ * level first, lessons not yet drawn before ones already drawn. A "Byg videre" lesson waits behind the
+ * others until its base drawing is done. `random` breaks ties (and drives "surprise me").
  */
 export function recommend(
   lessons: Lesson[],
@@ -38,12 +41,16 @@ export function recommend(
   completed: ReadonlySet<string>,
   count = 3,
   random: () => number = Math.random,
+  style?: Style,
 ): Lesson[] {
   const scored = lessons.map((lesson) => {
     const miss = matchesInterest(lesson, interest) ? 0 : 10
     const levelGap = Math.abs(lesson.level - level) * 3 + (lesson.level > level ? 1 : 0)
+    const styleGap = style && (lesson.style ?? 'enkel') !== style ? 4 : 0
+    const baseMissing = lesson.base && !completed.has(lesson.base) ? 6 : 0
     const done = completed.has(lesson.id) ? 4 : 0
-    return { lesson, score: miss + levelGap + done + random() * (interest === 'surprise' ? 3 : 0.5) }
+    const noise = random() * (interest === 'surprise' ? 3 : 0.5)
+    return { lesson, score: miss + levelGap + styleGap + baseMissing + done + noise }
   })
   return scored
     .sort((a, b) => a.score - b.score)
