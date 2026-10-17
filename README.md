@@ -14,14 +14,20 @@ Skærmen er kun instruktør: den viser trin for trin, hvad der skal tegnes, og g
 - **Trin for trin:** Det, man allerede har tegnet, står i gråt. Den nye streg bliver "tegnet" i farve foran barnet,
   og hjælpelinjer er stiplede ("tegn dem let"). Man kan gå frem og tilbage, swipe, hoppe til et trin,
   se animationen igen og få teksten læst op. Skærmen slukker ikke midt i en tegning.
-- **115 tegninger på fire niveauer** (*Spire*, *Tegner*, *Kunstner*, *Mester*):
+- **191 tegninger på fire niveauer** (*Spire*, *Tegner*, *Kunstner*, *Mester*):
   - *Dyr:* kat, fisk, fugl, ugle, hvalp, delfin, elefant, sommerfugl, pingvin, kanin, papegøje, hest, søhest,
     muslinger og søstjerne, og en naturtro ræv
   - *Natur:* blomster (solsikke, tulipan, rose, kaktus, blade, buket i vase), bjerge, strand, solnedgang over havet og et træ
   - *Mennesker:* ansigter, følelser, frisurer, profil, øjne, næse og mund, portræt med skygger, en hel krop,
     en påklædningsdukke, en kludedukke og en modetegning
   - *Ting:* hus, dukkehus, bil, raket, fly, fyrtårn, slot, motorcykel, crosser, ATV, monster truck, gravemaskine og traktor
-  - *Fantasi:* havfruer, fe, enhjørning, drage og robot
+  - *Fantasi:* havfruer, fe, enhjørning, drage og robot – og *Isriget* (isprinsesse, prinsessesøster, sneven og
+    isslot) og *Rumeventyr* (rumridder, mørk rumridder, kuppelrobot og stjernejager)
+  - *Højtider:* halloween (græskar, heks, spøgelse, spøgelseshus), jul (juletræ, julemand, rensdyr, kane, gave,
+    snemand, nisse), nytår (fyrværkeri, kransekage), valentinsdag (hjerte), fastelavn (tønde), påske (påskeæg,
+    kylling), sankthans (bål) og fødselsdag (kage, balloner)
+  - *Spil:* blokverden (blokhelt, grønt blokmonster, græsblok, pixelsværd), spilfigurer (klodsfigur, festlama,
+    flyvende festbus) og raketbiler (buggy, raketbil)
   - *Teknik:* streger, toneskala, skravering, skygge på en kugle, cylinder og kegle, teksturer, stilleben,
     1- og 2-punkts perspektiv og den samme kat i tre stilarter
   - *Prik-til-prik:* fisk, stjerne, hus og raket
@@ -39,7 +45,8 @@ Skærmen er kun instruktør: den viser trin for trin, hvad der skal tegnes, og g
   Barnet får personlig ros, et "næste gang kan du prøve …"-tip og bliver spurgt "Hvad synes du selv?".
   Tegningen kan gøres levende (vibrerende streger, dans), få baggrund og ramme, sammenlignes med forlægget
   og **deles** via enhedens del-menu.
-- **Galleri og mærker** pr. tegner, fx "Første tegning", "Prikkemester", "Skyggemester", "Detaljejæger" og "Naturtro".
+- **Galleri og mærker** pr. tegner, fx "Første tegning", "Prikkemester", "Skyggemester", "Detaljejæger", "Naturtro"
+  og "Festtegner".
 - **For voksne** (hold tandhjulet inde): sprog, tegnere, automatisk oplæsning, sletning af billeder og gode råd.
 - **Virker offline**, og alt bliver på enheden – ingen server og ingen tracking.
 
@@ -103,13 +110,17 @@ export const snail: Lesson = {
   dens streger ud (giv dem et `id` i base-lektionen).
 - **Hvert nyt motiv skal have flere udgaver:** en enkel (niveau 1–2), mindst én byg videre-udgave med detaljer og,
   hvor det giver mening, en naturtro udgave. En test fejler, hvis en enkel tegning står alene (se `CLAUDE.md`).
+- **Figurer fra film og spil får egne navne og eget design**, fx en isprinsesse, et grønt blokmonster og en
+  rumridder. Varemærkenavne må ikke stå i titler, tekster eller id'er – en test holder øje med det.
 - `labels` skriver små forklaringer på tegningen, fx "horisont".
 - Prik-til-prik laves med `dotLesson()` i `src/lessons/dots.ts`.
 - Hjælpefunktioner som `circle`, `ellipse`, `arc`, `ellipseArc`, `mirrorX`, `hatch`, `intersect`, `ring`,
-  `goldenSpiral`, `starPoints` og `radial` (eger og dækmønstre) ligger i `src/lessons/shapes.ts`.
+  `goldenSpiral`, `starPoints`, `radial` (eger og dækmønstre) og `pixels` (pixeltegning på et net) ligger i
+  `src/lessons/shapes.ts`.
 
 `npm test` fanger ugyldige stier, manglende oversættelser, streger, der viskes ud uden at være tegnet,
-byg videre-lektioner, der peger på en lektion, som ikke findes, og enkle tegninger uden andre udgaver.
+byg videre-lektioner, der peger på en lektion, som ikke findes, enkle tegninger uden andre udgaver og
+varemærkenavne i tegningerne.
 
 ## Opbygning
 
