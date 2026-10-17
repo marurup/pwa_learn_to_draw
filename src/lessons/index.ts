@@ -114,6 +114,82 @@ import { airplaneDetail } from './ting/airplane-detail'
 import { lighthouseDetail } from './ting/lighthouse-detail'
 import { robotDetail } from './fantasi/robot-detail'
 import { unicornDetail } from './fantasi/unicorn-detail'
+import { pumpkin } from './hoejtider/pumpkin'
+import { pumpkinDetail } from './hoejtider/pumpkin-detail'
+import { pumpkinReal } from './hoejtider/pumpkin-real'
+import { witch } from './hoejtider/witch'
+import { witchDetail } from './hoejtider/witch-detail'
+import { ghost } from './hoejtider/ghost'
+import { ghostDetail } from './hoejtider/ghost-detail'
+import { hauntedHouse } from './hoejtider/haunted-house'
+import { hauntedHouseDetail } from './hoejtider/haunted-house-detail'
+import { christmasTree } from './hoejtider/christmas-tree'
+import { christmasTreeDetail } from './hoejtider/christmas-tree-detail'
+import { santa } from './hoejtider/santa'
+import { santaDetail } from './hoejtider/santa-detail'
+import { reindeer } from './hoejtider/reindeer'
+import { reindeerDetail } from './hoejtider/reindeer-detail'
+import { sleigh } from './hoejtider/sleigh'
+import { sleighDetail } from './hoejtider/sleigh-detail'
+import { gift } from './hoejtider/gift'
+import { giftDetail } from './hoejtider/gift-detail'
+import { snowman } from './hoejtider/snowman'
+import { snowmanDetail } from './hoejtider/snowman-detail'
+import { nisse } from './hoejtider/nisse'
+import { nisseDetail } from './hoejtider/nisse-detail'
+import { fireworks } from './hoejtider/fireworks'
+import { fireworksDetail } from './hoejtider/fireworks-detail'
+import { kransekage } from './hoejtider/kransekage'
+import { kransekageDetail } from './hoejtider/kransekage-detail'
+import { heart } from './hoejtider/heart'
+import { heartDetail } from './hoejtider/heart-detail'
+import { barrel } from './hoejtider/barrel'
+import { barrelDetail } from './hoejtider/barrel-detail'
+import { easterEgg } from './hoejtider/easter-egg'
+import { easterEggDetail } from './hoejtider/easter-egg-detail'
+import { chick } from './hoejtider/chick'
+import { chickDetail } from './hoejtider/chick-detail'
+import { bonfire } from './hoejtider/bonfire'
+import { bonfireDetail } from './hoejtider/bonfire-detail'
+import { birthdayCake } from './hoejtider/birthday-cake'
+import { birthdayCakeDetail } from './hoejtider/birthday-cake-detail'
+import { balloons } from './hoejtider/balloons'
+import { balloonsDetail } from './hoejtider/balloons-detail'
+import { blockHero } from './spil/block-hero'
+import { blockHeroDetail } from './spil/block-hero-detail'
+import { blockMonster } from './spil/block-monster'
+import { blockMonsterDetail } from './spil/block-monster-detail'
+import { grassBlock } from './spil/grass-block'
+import { grassBlockDetail } from './spil/grass-block-detail'
+import { pixelSword } from './spil/pixel-sword'
+import { pixelSwordDetail } from './spil/pixel-sword-detail'
+import { brickFigure } from './spil/brick-figure'
+import { brickFigureDetail } from './spil/brick-figure-detail'
+import { llamaPinata } from './spil/llama-pinata'
+import { llamaPinataDetail } from './spil/llama-pinata-detail'
+import { partyBus } from './spil/party-bus'
+import { partyBusDetail } from './spil/party-bus-detail'
+import { buggy } from './spil/buggy'
+import { buggyDetail } from './spil/buggy-detail'
+import { rocketCar } from './spil/rocket-car'
+import { rocketCarDetail } from './spil/rocket-car-detail'
+import { icePrincess } from './fantasi/ice-princess'
+import { icePrincessDetail } from './fantasi/ice-princess-detail'
+import { icePrincessReal } from './fantasi/ice-princess-real'
+import { princessSister } from './fantasi/princess-sister'
+import { princessSisterDetail } from './fantasi/princess-sister-detail'
+import { snowFriend } from './fantasi/snow-friend'
+import { snowFriendDetail } from './fantasi/snow-friend-detail'
+import { iceCastle } from './fantasi/ice-castle'
+import { iceCastleDetail } from './fantasi/ice-castle-detail'
+import { spaceKnight } from './fantasi/space-knight'
+import { spaceKnightDetail } from './fantasi/space-knight-detail'
+import { darkKnight } from './fantasi/dark-knight'
+import { darkKnightDetail } from './fantasi/dark-knight-detail'
+import { domeRobot } from './fantasi/dome-robot'
+import { domeRobotDetail } from './fantasi/dome-robot-detail'
+import { starFighter } from './fantasi/star-fighter'
+import { starFighterDetail } from './fantasi/star-fighter-detail'
 
 /** Every lesson, in the order they appear in the catalog (easiest first). */
 export const LESSONS: Lesson[] = [
@@ -232,6 +308,82 @@ export const LESSONS: Lesson[] = [
   lighthouseDetail,
   robotDetail,
   unicornDetail,
+  pumpkin,
+  pumpkinDetail,
+  pumpkinReal,
+  witch,
+  witchDetail,
+  ghost,
+  ghostDetail,
+  hauntedHouse,
+  hauntedHouseDetail,
+  christmasTree,
+  christmasTreeDetail,
+  santa,
+  santaDetail,
+  reindeer,
+  reindeerDetail,
+  sleigh,
+  sleighDetail,
+  gift,
+  giftDetail,
+  snowman,
+  snowmanDetail,
+  nisse,
+  nisseDetail,
+  fireworks,
+  fireworksDetail,
+  kransekage,
+  kransekageDetail,
+  heart,
+  heartDetail,
+  barrel,
+  barrelDetail,
+  easterEgg,
+  easterEggDetail,
+  chick,
+  chickDetail,
+  bonfire,
+  bonfireDetail,
+  birthdayCake,
+  birthdayCakeDetail,
+  balloons,
+  balloonsDetail,
+  blockHero,
+  blockHeroDetail,
+  blockMonster,
+  blockMonsterDetail,
+  grassBlock,
+  grassBlockDetail,
+  pixelSword,
+  pixelSwordDetail,
+  brickFigure,
+  brickFigureDetail,
+  llamaPinata,
+  llamaPinataDetail,
+  partyBus,
+  partyBusDetail,
+  buggy,
+  buggyDetail,
+  rocketCar,
+  rocketCarDetail,
+  icePrincess,
+  icePrincessDetail,
+  icePrincessReal,
+  princessSister,
+  princessSisterDetail,
+  snowFriend,
+  snowFriendDetail,
+  iceCastle,
+  iceCastleDetail,
+  spaceKnight,
+  spaceKnightDetail,
+  darkKnight,
+  darkKnightDetail,
+  domeRobot,
+  domeRobotDetail,
+  starFighter,
+  starFighterDetail,
 ]
 
 const byId = new Map(LESSONS.map((l) => [l.id, l]))
@@ -240,14 +392,16 @@ export function getLesson(id: string | undefined): Lesson | undefined {
   return id ? byId.get(id) : undefined
 }
 
-export const CATEGORIES: Category[] = ['prik', 'dyr', 'natur', 'mennesker', 'ting', 'fantasi', 'teknik']
+export const CATEGORIES: Category[] = ['prik', 'dyr', 'natur', 'mennesker', 'ting', 'fantasi', 'hoejtider', 'spil', 'teknik']
 
 export const SUBS: Partial<Record<Category, Sub[]>> = {
   dyr: ['fugle', 'fisk', 'landdyr', 'insekter'],
   natur: ['blomster', 'landskab'],
   mennesker: ['ansigter', 'krop', 'dukker'],
   ting: ['koeretoejer', 'maskiner', 'bygninger', 'rummet'],
-  fantasi: ['havfruer', 'eventyr'],
+  fantasi: ['havfruer', 'isriget', 'rumeventyr', 'eventyr'],
+  hoejtider: ['halloween', 'jul', 'nytaar', 'hjerter', 'fastelavn', 'paaske', 'sankthans', 'foedselsdag'],
+  spil: ['blokke', 'spilfigurer', 'raketbiler'],
 }
 
 export const CATEGORY_ICON: Record<Category, string> = {
@@ -257,6 +411,8 @@ export const CATEGORY_ICON: Record<Category, string> = {
   mennesker: '🙂',
   ting: '🚗',
   fantasi: '🐉',
+  hoejtider: '🎃',
+  spil: '🎮',
   teknik: '✏️',
 }
 

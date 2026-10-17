@@ -4,7 +4,7 @@ import { computeBadges, newBadges } from './badges'
 import { composeStep, dotNumberPositions } from './compose'
 import { LESSONS } from './index'
 import { levelForAge, matchesInterest, recommend } from './recommend'
-import { hatch, intersect, mirrorX, transform } from './shapes'
+import { hatch, intersect, mirrorX, pixels, transform } from './shapes'
 import type { Lesson } from './types'
 
 const t = { da: 'x', en: 'x' }
@@ -71,6 +71,10 @@ describe('shapes', () => {
 
   it('scales and moves absolute and relative paths', () => {
     expect(transform('M0 0 L10 10 h5 a2 2 0 0 1 4 0 V3', 2, 1, 1)).toBe('M1 1 L21 21 h10 a4 4 0 0 1 8 0 V7')
+  })
+
+  it('draws pixel cells on a grid', () => {
+    expect(pixels([[1, 2]], 10, 20, 5)).toBe('M15 30 L20 30 L20 35 L15 35 Z')
   })
 
   it('intersects lines', () => {

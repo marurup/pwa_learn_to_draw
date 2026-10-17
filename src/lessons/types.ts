@@ -6,7 +6,7 @@ export type L10n = Record<Lang, string>
 
 export type Level = 1 | 2 | 3 | 4
 
-export type Category = 'prik' | 'dyr' | 'ting' | 'mennesker' | 'natur' | 'fantasi' | 'teknik'
+export type Category = 'prik' | 'dyr' | 'ting' | 'mennesker' | 'natur' | 'fantasi' | 'hoejtider' | 'spil' | 'teknik'
 export type Sub =
   | 'fugle'
   | 'fisk'
@@ -23,6 +23,19 @@ export type Sub =
   | 'maskiner'
   | 'havfruer'
   | 'eventyr'
+  | 'isriget'
+  | 'rumeventyr'
+  | 'halloween'
+  | 'jul'
+  | 'nytaar'
+  | 'paaske'
+  | 'fastelavn'
+  | 'foedselsdag'
+  | 'sankthans'
+  | 'hjerter'
+  | 'blokke'
+  | 'spilfigurer'
+  | 'raketbiler'
 
 /** How the motif is drawn: simple shapes, with extra details, or as true to life as possible. */
 export type Style = 'enkel' | 'detaljer' | 'naturtro'

@@ -30,6 +30,7 @@ const RULES: Rule[] = [
   { id: 'allLevels', icon: '🌈', test: (done) => [1, 2, 3, 4].every((lv) => done.some((l) => l.level === lv)) },
   { id: 'details', icon: '✨', test: (done) => done.filter((l) => l.style === 'detaljer').length >= 3 },
   { id: 'realistic', icon: '🎨', test: (done) => done.filter((l) => l.style === 'naturtro').length >= 3 },
+  { id: 'holidays', icon: '🎄', test: (done) => done.filter((l) => l.category === 'hoejtider').length >= 3 },
 ]
 
 export function computeBadges(profile: Profile, lessons: Lesson[]): Badge[] {

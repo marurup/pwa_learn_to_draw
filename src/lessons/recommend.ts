@@ -1,7 +1,7 @@
 import type { Lesson, Level, Style } from './types'
 
-export type Interest = 'animals' | 'flowers' | 'people' | 'things' | 'fantasy' | 'technique' | 'surprise'
-export const INTERESTS: Interest[] = ['animals', 'flowers', 'people', 'things', 'fantasy', 'technique', 'surprise']
+export type Interest = 'animals' | 'flowers' | 'people' | 'things' | 'fantasy' | 'holidays' | 'games' | 'technique' | 'surprise'
+export const INTERESTS: Interest[] = ['animals', 'flowers', 'people', 'things', 'fantasy', 'holidays', 'games', 'technique', 'surprise']
 
 export function levelForAge(age: number): Level {
   if (age <= 5) return 1
@@ -22,6 +22,10 @@ export function matchesInterest(lesson: Lesson, interest: Interest): boolean {
       return lesson.category === 'ting' || ['koeretoejer', 'maskiner', 'bygninger', 'rummet'].includes(lesson.sub ?? '')
     case 'fantasy':
       return lesson.category === 'fantasi'
+    case 'holidays':
+      return lesson.category === 'hoejtider'
+    case 'games':
+      return lesson.category === 'spil'
     case 'technique':
       return lesson.category === 'teknik'
     case 'surprise':
