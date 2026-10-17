@@ -19,6 +19,10 @@ export type Sub =
   | 'landskab'
   | 'ansigter'
   | 'krop'
+  | 'dukker'
+  | 'maskiner'
+  | 'havfruer'
+  | 'eventyr'
 
 /** How the motif is drawn: simple shapes, with extra details, or as true to life as possible. */
 export type Style = 'enkel' | 'detaljer' | 'naturtro'

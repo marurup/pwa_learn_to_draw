@@ -65,6 +65,14 @@ import { houseDetail } from './ting/house-detail'
 import { textures } from './teknik/textures'
 import { cylinderCone } from './teknik/cylinder-cone'
 import { appleStillLife } from './teknik/apple-still-life'
+import { mermaid } from './fantasi/mermaid'
+import { mermaidDetail } from './fantasi/mermaid-detail'
+import { mermaidRock } from './fantasi/mermaid-rock'
+import { mermaidReal } from './fantasi/mermaid-real'
+import { seahorse } from './dyr/seahorse'
+import { seahorseDetail } from './dyr/seahorse-detail'
+import { shells } from './dyr/shells'
+import { shellsDetail } from './dyr/shells-detail'
 
 /** Every lesson, in the order they appear in the catalog (easiest first). */
 export const LESSONS: Lesson[] = [
@@ -134,6 +142,14 @@ export const LESSONS: Lesson[] = [
   textures,
   cylinderCone,
   appleStillLife,
+  mermaid,
+  mermaidDetail,
+  mermaidRock,
+  mermaidReal,
+  seahorse,
+  seahorseDetail,
+  shells,
+  shellsDetail,
 ]
 
 const byId = new Map(LESSONS.map((l) => [l.id, l]))
@@ -149,6 +165,7 @@ export const SUBS: Partial<Record<Category, Sub[]>> = {
   natur: ['blomster', 'landskab'],
   mennesker: ['ansigter', 'krop'],
   ting: ['koeretoejer', 'bygninger', 'rummet'],
+  fantasi: ['havfruer', 'eventyr'],
 }
 
 export const CATEGORY_ICON: Record<Category, string> = {

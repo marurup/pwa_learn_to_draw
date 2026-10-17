@@ -7,6 +7,7 @@ export const robot: Lesson = {
   id: 'robot',
   title: { da: 'Robot', en: 'Robot' },
   category: 'fantasi',
+  sub: 'eventyr',
   level: 1,
   minutes: 8,
   intro: {
