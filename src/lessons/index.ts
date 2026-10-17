@@ -137,6 +137,24 @@ import { snowman } from './hoejtider/snowman'
 import { snowmanDetail } from './hoejtider/snowman-detail'
 import { nisse } from './hoejtider/nisse'
 import { nisseDetail } from './hoejtider/nisse-detail'
+import { fireworks } from './hoejtider/fireworks'
+import { fireworksDetail } from './hoejtider/fireworks-detail'
+import { kransekage } from './hoejtider/kransekage'
+import { kransekageDetail } from './hoejtider/kransekage-detail'
+import { heart } from './hoejtider/heart'
+import { heartDetail } from './hoejtider/heart-detail'
+import { barrel } from './hoejtider/barrel'
+import { barrelDetail } from './hoejtider/barrel-detail'
+import { easterEgg } from './hoejtider/easter-egg'
+import { easterEggDetail } from './hoejtider/easter-egg-detail'
+import { chick } from './hoejtider/chick'
+import { chickDetail } from './hoejtider/chick-detail'
+import { bonfire } from './hoejtider/bonfire'
+import { bonfireDetail } from './hoejtider/bonfire-detail'
+import { birthdayCake } from './hoejtider/birthday-cake'
+import { birthdayCakeDetail } from './hoejtider/birthday-cake-detail'
+import { balloons } from './hoejtider/balloons'
+import { balloonsDetail } from './hoejtider/balloons-detail'
 
 /** Every lesson, in the order they appear in the catalog (easiest first). */
 export const LESSONS: Lesson[] = [
@@ -278,6 +296,24 @@ export const LESSONS: Lesson[] = [
   snowmanDetail,
   nisse,
   nisseDetail,
+  fireworks,
+  fireworksDetail,
+  kransekage,
+  kransekageDetail,
+  heart,
+  heartDetail,
+  barrel,
+  barrelDetail,
+  easterEgg,
+  easterEggDetail,
+  chick,
+  chickDetail,
+  bonfire,
+  bonfireDetail,
+  birthdayCake,
+  birthdayCakeDetail,
+  balloons,
+  balloonsDetail,
 ]
 
 const byId = new Map(LESSONS.map((l) => [l.id, l]))
@@ -294,7 +330,7 @@ export const SUBS: Partial<Record<Category, Sub[]>> = {
   mennesker: ['ansigter', 'krop', 'dukker'],
   ting: ['koeretoejer', 'maskiner', 'bygninger', 'rummet'],
   fantasi: ['havfruer', 'eventyr'],
-  hoejtider: ['halloween', 'jul'],
+  hoejtider: ['halloween', 'jul', 'nytaar', 'hjerter', 'fastelavn', 'paaske', 'sankthans', 'foedselsdag'],
 }
 
 export const CATEGORY_ICON: Record<Category, string> = {
