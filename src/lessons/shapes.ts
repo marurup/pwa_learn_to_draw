@@ -87,6 +87,11 @@ export function rect(x: number, y: number, w: number, h: number): string {
   )
 }
 
+/** Pixel art: one square per [column, row] cell of a grid that starts at (x, y) with cells `size` wide. */
+export function pixels(cells: Pt[], x: number, y: number, size: number): string {
+  return cells.map(([c, r]) => rect(x + c * size, y + r * size, size, size)).join(' ')
+}
+
 export function roundRect(x: number, y: number, w: number, h: number, r: number): string {
   return [
     `M${n(x + r)} ${n(y)}`,

@@ -155,6 +155,24 @@ import { birthdayCake } from './hoejtider/birthday-cake'
 import { birthdayCakeDetail } from './hoejtider/birthday-cake-detail'
 import { balloons } from './hoejtider/balloons'
 import { balloonsDetail } from './hoejtider/balloons-detail'
+import { blockHero } from './spil/block-hero'
+import { blockHeroDetail } from './spil/block-hero-detail'
+import { blockMonster } from './spil/block-monster'
+import { blockMonsterDetail } from './spil/block-monster-detail'
+import { grassBlock } from './spil/grass-block'
+import { grassBlockDetail } from './spil/grass-block-detail'
+import { pixelSword } from './spil/pixel-sword'
+import { pixelSwordDetail } from './spil/pixel-sword-detail'
+import { brickFigure } from './spil/brick-figure'
+import { brickFigureDetail } from './spil/brick-figure-detail'
+import { llamaPinata } from './spil/llama-pinata'
+import { llamaPinataDetail } from './spil/llama-pinata-detail'
+import { partyBus } from './spil/party-bus'
+import { partyBusDetail } from './spil/party-bus-detail'
+import { buggy } from './spil/buggy'
+import { buggyDetail } from './spil/buggy-detail'
+import { rocketCar } from './spil/rocket-car'
+import { rocketCarDetail } from './spil/rocket-car-detail'
 
 /** Every lesson, in the order they appear in the catalog (easiest first). */
 export const LESSONS: Lesson[] = [
@@ -314,6 +332,24 @@ export const LESSONS: Lesson[] = [
   birthdayCakeDetail,
   balloons,
   balloonsDetail,
+  blockHero,
+  blockHeroDetail,
+  blockMonster,
+  blockMonsterDetail,
+  grassBlock,
+  grassBlockDetail,
+  pixelSword,
+  pixelSwordDetail,
+  brickFigure,
+  brickFigureDetail,
+  llamaPinata,
+  llamaPinataDetail,
+  partyBus,
+  partyBusDetail,
+  buggy,
+  buggyDetail,
+  rocketCar,
+  rocketCarDetail,
 ]
 
 const byId = new Map(LESSONS.map((l) => [l.id, l]))
@@ -322,7 +358,7 @@ export function getLesson(id: string | undefined): Lesson | undefined {
   return id ? byId.get(id) : undefined
 }
 
-export const CATEGORIES: Category[] = ['prik', 'dyr', 'natur', 'mennesker', 'ting', 'fantasi', 'hoejtider', 'teknik']
+export const CATEGORIES: Category[] = ['prik', 'dyr', 'natur', 'mennesker', 'ting', 'fantasi', 'hoejtider', 'spil', 'teknik']
 
 export const SUBS: Partial<Record<Category, Sub[]>> = {
   dyr: ['fugle', 'fisk', 'landdyr', 'insekter'],
@@ -331,6 +367,7 @@ export const SUBS: Partial<Record<Category, Sub[]>> = {
   ting: ['koeretoejer', 'maskiner', 'bygninger', 'rummet'],
   fantasi: ['havfruer', 'eventyr'],
   hoejtider: ['halloween', 'jul', 'nytaar', 'hjerter', 'fastelavn', 'paaske', 'sankthans', 'foedselsdag'],
+  spil: ['blokke', 'spilfigurer', 'raketbiler'],
 }
 
 export const CATEGORY_ICON: Record<Category, string> = {
