@@ -1,13 +1,5 @@
-import { ellipse, poly, type Pt } from '../shapes'
+import { ellipse, poly, starPoints, type Pt } from '../shapes'
 import type { Lesson } from '../types'
-
-/** A five-armed star. */
-export const starPoints = (cx: number, cy: number, r: number, inner: number): Pt[] =>
-  Array.from({ length: 10 }, (_, i): Pt => {
-    const a = ((i * 36 - 90) * Math.PI) / 180
-    const rr = i % 2 ? inner : r
-    return [cx + rr * Math.cos(a), cy + rr * Math.sin(a)]
-  })
 
 /** A spiral from the middle outwards, like a snail shell seen from the side. */
 export const spiral = (cx: number, cy: number, r1: number, turns: number) =>

@@ -1,4 +1,4 @@
-import { arc, circle, mirrorX, poly, type Pt } from '../shapes'
+import { arc, circle, mirrorX, poly, starPoints, type Pt } from '../shapes'
 import type { Lesson } from '../types'
 import { TAIL_INNER, TAIL_OUTER, tailShape } from './mermaid'
 
@@ -31,15 +31,6 @@ const pearls = Array.from({ length: 7 }, (_, i) => quadPt([[176, 222], [200, 230
 const necklace = Array.from({ length: 7 }, (_, i) => quadPt([[190, 153], [200, 164], [210, 153]], i / 6))
   .map(([x, y]) => circle(x, y, 2.2))
   .join(' ')
-const star = (cx: number, cy: number, r: number) =>
-  poly(
-    Array.from({ length: 10 }, (_, i): Pt => {
-      const a = ((i * 36 - 90) * Math.PI) / 180
-      const rr = i % 2 ? r * 0.45 : r
-      return [cx + rr * Math.cos(a), cy + rr * Math.sin(a)]
-    }),
-    true,
-  )
 const hairStrandsL = 'M152 150 Q144 180 150 210 M160 140 Q154 170 158 196'
 const shellRidgesL = 'M188 178 L184 170 M188 178 L189 168 M188 178 L194 171'
 
@@ -69,7 +60,7 @@ export const mermaidDetail: Lesson = {
     },
     {
       text: { da: 'Tegn lokker i håret og en søstjerne som hårspænde.', en: 'Draw locks in the hair and a starfish hair clip.' },
-      strokes: [{ d: `${hairStrandsL} ${mirrorX(hairStrandsL, 200)}`, weight: 0.6 }, { d: star(236, 84, 11) }],
+      strokes: [{ d: `${hairStrandsL} ${mirrorX(hairStrandsL, 200)}`, weight: 0.6 }, { d: poly(starPoints(236, 84, 11, 5), true) }],
     },
     {
       text: { da: 'Tegn riller på muslingerne og en perlekæde om halsen.', en: 'Draw ridges on the shells and a pearl necklace around her neck.' },

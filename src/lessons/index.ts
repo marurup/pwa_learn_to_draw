@@ -73,6 +73,17 @@ import { seahorse } from './dyr/seahorse'
 import { seahorseDetail } from './dyr/seahorse-detail'
 import { shells } from './dyr/shells'
 import { shellsDetail } from './dyr/shells-detail'
+import { doll } from './mennesker/doll'
+import { dollPrincess } from './mennesker/doll-princess'
+import { dollBallerina } from './mennesker/doll-ballerina'
+import { dollMermaid } from './mennesker/doll-mermaid'
+import { fashionFigure } from './mennesker/fashion-figure'
+import { ragDoll } from './mennesker/rag-doll'
+import { ragDollDetail } from './mennesker/rag-doll-detail'
+import { fairy } from './fantasi/fairy'
+import { fairyDetail } from './fantasi/fairy-detail'
+import { dollhouse } from './ting/dollhouse'
+import { dollhouseDetail } from './ting/dollhouse-detail'
 
 /** Every lesson, in the order they appear in the catalog (easiest first). */
 export const LESSONS: Lesson[] = [
@@ -150,6 +161,17 @@ export const LESSONS: Lesson[] = [
   seahorseDetail,
   shells,
   shellsDetail,
+  doll,
+  dollPrincess,
+  dollBallerina,
+  dollMermaid,
+  fashionFigure,
+  ragDoll,
+  ragDollDetail,
+  fairy,
+  fairyDetail,
+  dollhouse,
+  dollhouseDetail,
 ]
 
 const byId = new Map(LESSONS.map((l) => [l.id, l]))
@@ -163,7 +185,7 @@ export const CATEGORIES: Category[] = ['prik', 'dyr', 'natur', 'mennesker', 'tin
 export const SUBS: Partial<Record<Category, Sub[]>> = {
   dyr: ['fugle', 'fisk', 'landdyr', 'insekter'],
   natur: ['blomster', 'landskab'],
-  mennesker: ['ansigter', 'krop'],
+  mennesker: ['ansigter', 'krop', 'dukker'],
   ting: ['koeretoejer', 'bygninger', 'rummet'],
   fantasi: ['havfruer', 'eventyr'],
 }

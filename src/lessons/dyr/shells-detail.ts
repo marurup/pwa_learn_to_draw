@@ -1,6 +1,6 @@
-import { circle, ellipse, poly } from '../shapes'
+import { circle, ellipse, poly, starPoints } from '../shapes'
 import type { Lesson } from '../types'
-import { SCALLOP_TOP, spiral, starPoints } from './shells'
+import { SCALLOP_TOP, spiral } from './shells'
 
 // Curved bands across the scallop's ridges, getting wider towards the edge.
 const bands = [22, 34, 46]

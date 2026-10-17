@@ -80,6 +80,15 @@ describe('lesson catalogue', () => {
     expect(first.strokes.some((s) => s.current)).toBe(true)
   })
 
+  it('lets the dress-up doll change clothes: each outfit starts without the old dress', () => {
+    for (const id of ['doll-princess', 'doll-ballerina', 'doll-mermaid']) {
+      expect(extensionsOf('doll').map((l) => l.id)).toContain(id)
+      const old = composeStep(getLesson(id)!, 0).strokes.filter((s) => !s.current)
+      expect(old.length).toBeGreaterThan(5) // the doll's head, hair and face are still there
+      expect(old.map((s) => s.stroke.id)).not.toContain('dress')
+    }
+  })
+
   it('finds lessons by id', () => {
     expect(getLesson('cat')?.id).toBe('cat')
     expect(getLesson('nope')).toBeUndefined()

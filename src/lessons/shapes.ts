@@ -35,6 +35,15 @@ export function goldenSpiral(cx: number, cy: number, radius: number, count: numb
   })
 }
 
+/** The points of a five-armed star with the first arm pointing up; `inner` is the radius between the arms. */
+export function starPoints(cx: number, cy: number, r: number, inner: number): Pt[] {
+  return Array.from({ length: 10 }, (_, i): Pt => {
+    const a = ((i * 36 - 90) * Math.PI) / 180
+    const rr = i % 2 ? inner : r
+    return [cx + rr * Math.cos(a), cy + rr * Math.sin(a)]
+  })
+}
+
 /** Circular arc from startDeg to endDeg (0° = right, 90° = down), clockwise when end > start. */
 export function arc(cx: number, cy: number, r: number, startDeg: number, endDeg: number): string {
   return ellipseArc(cx, cy, r, r, startDeg, endDeg)
