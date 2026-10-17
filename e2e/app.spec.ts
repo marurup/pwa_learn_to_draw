@@ -88,6 +88,7 @@ test('the catalogue can be filtered by style, easiest first', async ({ page }) =
   await onboard(page, 'Dansk', 'Ida', '9')
   await page.getByTestId('choose-know').click()
   await page.getByTestId('cat-mennesker').click()
+  await page.getByRole('button', { name: 'Ansigter', exact: true }).click()
   await page.getByTestId('style-naturtro').click()
   const cards = page.locator('.lesson-grid .lesson-card')
   await expect(cards).toHaveCount(4)
