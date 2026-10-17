@@ -84,6 +84,20 @@ import { fairy } from './fantasi/fairy'
 import { fairyDetail } from './fantasi/fairy-detail'
 import { dollhouse } from './ting/dollhouse'
 import { dollhouseDetail } from './ting/dollhouse-detail'
+import { monsterTruck } from './ting/monster-truck'
+import { monsterTruckDetail } from './ting/monster-truck-detail'
+import { monsterTruckJump } from './ting/monster-truck-jump'
+import { motorcycle } from './ting/motorcycle'
+import { motorcycleDetail } from './ting/motorcycle-detail'
+import { motorcycleReal } from './ting/motorcycle-real'
+import { motocross } from './ting/motocross'
+import { motocrossDetail } from './ting/motocross-detail'
+import { quad } from './ting/quad'
+import { quadDetail } from './ting/quad-detail'
+import { digger } from './ting/digger'
+import { diggerDetail } from './ting/digger-detail'
+import { tractor } from './ting/tractor'
+import { tractorDetail } from './ting/tractor-detail'
 
 /** Every lesson, in the order they appear in the catalog (easiest first). */
 export const LESSONS: Lesson[] = [
@@ -172,6 +186,20 @@ export const LESSONS: Lesson[] = [
   fairyDetail,
   dollhouse,
   dollhouseDetail,
+  monsterTruck,
+  monsterTruckDetail,
+  monsterTruckJump,
+  motorcycle,
+  motorcycleDetail,
+  motorcycleReal,
+  motocross,
+  motocrossDetail,
+  quad,
+  quadDetail,
+  digger,
+  diggerDetail,
+  tractor,
+  tractorDetail,
 ]
 
 const byId = new Map(LESSONS.map((l) => [l.id, l]))
@@ -186,7 +214,7 @@ export const SUBS: Partial<Record<Category, Sub[]>> = {
   dyr: ['fugle', 'fisk', 'landdyr', 'insekter'],
   natur: ['blomster', 'landskab'],
   mennesker: ['ansigter', 'krop', 'dukker'],
-  ting: ['koeretoejer', 'bygninger', 'rummet'],
+  ting: ['koeretoejer', 'maskiner', 'bygninger', 'rummet'],
   fantasi: ['havfruer', 'eventyr'],
 }
 

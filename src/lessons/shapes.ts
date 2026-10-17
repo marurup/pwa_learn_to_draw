@@ -44,6 +44,14 @@ export function starPoints(cx: number, cy: number, r: number, inner: number): Pt
   })
 }
 
+/** n straight lines pointing out from a centre, from radius r1 to r2 – wheel spokes, tyre treads, rays. */
+export function radial(cx: number, cy: number, r1: number, r2: number, n: number, startDeg = 0): string {
+  return Array.from({ length: n }, (_, i) => {
+    const a = ((startDeg + (i * 360) / n) * Math.PI) / 180
+    return line(cx + r1 * Math.cos(a), cy + r1 * Math.sin(a), cx + r2 * Math.cos(a), cy + r2 * Math.sin(a))
+  }).join(' ')
+}
+
 /** Circular arc from startDeg to endDeg (0° = right, 90° = down), clockwise when end > start. */
 export function arc(cx: number, cy: number, r: number, startDeg: number, endDeg: number): string {
   return ellipseArc(cx, cy, r, r, startDeg, endDeg)
