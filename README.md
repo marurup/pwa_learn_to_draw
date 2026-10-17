@@ -14,12 +14,14 @@ Skærmen er kun instruktør: den viser trin for trin, hvad der skal tegnes, og g
 - **Trin for trin:** Det, man allerede har tegnet, står i gråt. Den nye streg bliver "tegnet" i farve foran barnet,
   og hjælpelinjer er stiplede ("tegn dem let"). Man kan gå frem og tilbage, swipe, hoppe til et trin,
   se animationen igen og få teksten læst op. Skærmen slukker ikke midt i en tegning.
-- **66 tegninger på fire niveauer** (*Spire*, *Tegner*, *Kunstner*, *Mester*):
-  - *Dyr:* kat, fisk, fugl, ugle, hvalp, delfin, elefant, sommerfugl, pingvin, kanin, papegøje, hest og en naturtro ræv
+- **115 tegninger på fire niveauer** (*Spire*, *Tegner*, *Kunstner*, *Mester*):
+  - *Dyr:* kat, fisk, fugl, ugle, hvalp, delfin, elefant, sommerfugl, pingvin, kanin, papegøje, hest, søhest,
+    muslinger og søstjerne, og en naturtro ræv
   - *Natur:* blomster (solsikke, tulipan, rose, kaktus, blade, buket i vase), bjerge, strand, solnedgang over havet og et træ
-  - *Mennesker:* ansigter, følelser, frisurer, profil, øjne, næse og mund, portræt med skygger og en hel krop
-  - *Ting:* hus, bil, raket, fly, fyrtårn og slot
-  - *Fantasi:* robot, enhjørning og drage
+  - *Mennesker:* ansigter, følelser, frisurer, profil, øjne, næse og mund, portræt med skygger, en hel krop,
+    en påklædningsdukke, en kludedukke og en modetegning
+  - *Ting:* hus, dukkehus, bil, raket, fly, fyrtårn, slot, motorcykel, crosser, ATV, monster truck, gravemaskine og traktor
+  - *Fantasi:* havfruer, fe, enhjørning, drage og robot
   - *Teknik:* streger, toneskala, skravering, skygge på en kugle, cylinder og kegle, teksturer, stilleben,
     1- og 2-punkts perspektiv og den samme kat i tre stilarter
   - *Prik-til-prik:* fisk, stjerne, hus og raket
@@ -27,7 +29,10 @@ Skærmen er kun instruktør: den viser trin for trin, hvad der skal tegnes, og g
   🎨 *Naturtro* (hjælpelinjer, rigtige proportioner og bløde skygger).
 - **Byg videre bagefter:** Når en enkel tegning er færdig, foreslår appen "Gør den mere detaljeret" eller
   "Prøv den naturtro udgave". En byg videre-lektion starter med den færdige tegning i gråt, så barnet fortsætter
-  på samme papir – fx kat → kat med pels og skygge, rose → naturtro rose, ansigt → portræt med skygger.
+  på samme papir – fx kat → kat med pels og skygge, rose → naturtro rose, ansigt → portræt med skygger,
+  monster truck → monster truck med flammer. Alle enkle tegninger har mindst én udgave mere.
+- **Påklædningsdukke:** Dukken tegnes én gang. Bagefter visker barnet kjolen ud og giver hende en prinsessekjole,
+  en ballerina-tutu eller en havfruehale.
 - **Prik-til-prik på papir:** print prikkerne (A4), eller brug **kalkér-tilstand**: Læg papiret på skærmen og tegn op.
   Berøring er låst, så blyanten ikke trykker på noget (hold knappen inde for at låse op).
 - **Når tegningen er færdig:** tag et billede, beskær og drej, og gør papiret hvidt (lyset bliver jævnet ud).
@@ -96,13 +101,15 @@ export const snail: Lesson = {
 - `style` er `'enkel'` (standard), `'detaljer'` eller `'naturtro'`. Udgaver af samme motiv deler `motif`.
 - `base: 'cat'` gør lektionen til en byg videre-lektion: den starter med den færdige kat, og `erase` kan viske
   dens streger ud (giv dem et `id` i base-lektionen).
+- **Hvert nyt motiv skal have flere udgaver:** en enkel (niveau 1–2), mindst én byg videre-udgave med detaljer og,
+  hvor det giver mening, en naturtro udgave. En test fejler, hvis en enkel tegning står alene (se `CLAUDE.md`).
 - `labels` skriver små forklaringer på tegningen, fx "horisont".
 - Prik-til-prik laves med `dotLesson()` i `src/lessons/dots.ts`.
-- Hjælpefunktioner som `circle`, `ellipse`, `arc`, `ellipseArc`, `mirrorX`, `hatch`, `intersect`, `ring` og
-  `goldenSpiral` ligger i `src/lessons/shapes.ts`.
+- Hjælpefunktioner som `circle`, `ellipse`, `arc`, `ellipseArc`, `mirrorX`, `hatch`, `intersect`, `ring`,
+  `goldenSpiral`, `starPoints` og `radial` (eger og dækmønstre) ligger i `src/lessons/shapes.ts`.
 
-`npm test` fanger ugyldige stier, manglende oversættelser, streger, der viskes ud uden at være tegnet, og
-byg videre-lektioner, der peger på en lektion, som ikke findes.
+`npm test` fanger ugyldige stier, manglende oversættelser, streger, der viskes ud uden at være tegnet,
+byg videre-lektioner, der peger på en lektion, som ikke findes, og enkle tegninger uden andre udgaver.
 
 ## Opbygning
 

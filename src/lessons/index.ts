@@ -65,6 +65,55 @@ import { houseDetail } from './ting/house-detail'
 import { textures } from './teknik/textures'
 import { cylinderCone } from './teknik/cylinder-cone'
 import { appleStillLife } from './teknik/apple-still-life'
+import { mermaid } from './fantasi/mermaid'
+import { mermaidDetail } from './fantasi/mermaid-detail'
+import { mermaidRock } from './fantasi/mermaid-rock'
+import { mermaidReal } from './fantasi/mermaid-real'
+import { seahorse } from './dyr/seahorse'
+import { seahorseDetail } from './dyr/seahorse-detail'
+import { shells } from './dyr/shells'
+import { shellsDetail } from './dyr/shells-detail'
+import { doll } from './mennesker/doll'
+import { dollPrincess } from './mennesker/doll-princess'
+import { dollBallerina } from './mennesker/doll-ballerina'
+import { dollMermaid } from './mennesker/doll-mermaid'
+import { fashionFigure } from './mennesker/fashion-figure'
+import { ragDoll } from './mennesker/rag-doll'
+import { ragDollDetail } from './mennesker/rag-doll-detail'
+import { fairy } from './fantasi/fairy'
+import { fairyDetail } from './fantasi/fairy-detail'
+import { dollhouse } from './ting/dollhouse'
+import { dollhouseDetail } from './ting/dollhouse-detail'
+import { monsterTruck } from './ting/monster-truck'
+import { monsterTruckDetail } from './ting/monster-truck-detail'
+import { monsterTruckJump } from './ting/monster-truck-jump'
+import { motorcycle } from './ting/motorcycle'
+import { motorcycleDetail } from './ting/motorcycle-detail'
+import { motorcycleReal } from './ting/motorcycle-real'
+import { motocross } from './ting/motocross'
+import { motocrossDetail } from './ting/motocross-detail'
+import { quad } from './ting/quad'
+import { quadDetail } from './ting/quad-detail'
+import { digger } from './ting/digger'
+import { diggerDetail } from './ting/digger-detail'
+import { tractor } from './ting/tractor'
+import { tractorDetail } from './ting/tractor-detail'
+import { birdDetail } from './dyr/bird-detail'
+import { carDetail } from './ting/car-detail'
+import { rocketDetail } from './ting/rocket-detail'
+import { treeDetail } from './natur/tree-detail'
+import { dolphinDetail } from './dyr/dolphin-detail'
+import { elephantReal } from './dyr/elephant-real'
+import { butterflyDetail } from './dyr/butterfly-detail'
+import { penguinDetail } from './dyr/penguin-detail'
+import { rabbitDetail } from './dyr/rabbit-detail'
+import { cactusDetail } from './natur/cactus-detail'
+import { tulipDetail } from './natur/tulip-detail'
+import { beachDetail } from './natur/beach-detail'
+import { airplaneDetail } from './ting/airplane-detail'
+import { lighthouseDetail } from './ting/lighthouse-detail'
+import { robotDetail } from './fantasi/robot-detail'
+import { unicornDetail } from './fantasi/unicorn-detail'
 
 /** Every lesson, in the order they appear in the catalog (easiest first). */
 export const LESSONS: Lesson[] = [
@@ -134,6 +183,55 @@ export const LESSONS: Lesson[] = [
   textures,
   cylinderCone,
   appleStillLife,
+  mermaid,
+  mermaidDetail,
+  mermaidRock,
+  mermaidReal,
+  seahorse,
+  seahorseDetail,
+  shells,
+  shellsDetail,
+  doll,
+  dollPrincess,
+  dollBallerina,
+  dollMermaid,
+  fashionFigure,
+  ragDoll,
+  ragDollDetail,
+  fairy,
+  fairyDetail,
+  dollhouse,
+  dollhouseDetail,
+  monsterTruck,
+  monsterTruckDetail,
+  monsterTruckJump,
+  motorcycle,
+  motorcycleDetail,
+  motorcycleReal,
+  motocross,
+  motocrossDetail,
+  quad,
+  quadDetail,
+  digger,
+  diggerDetail,
+  tractor,
+  tractorDetail,
+  birdDetail,
+  carDetail,
+  rocketDetail,
+  treeDetail,
+  dolphinDetail,
+  elephantReal,
+  butterflyDetail,
+  penguinDetail,
+  rabbitDetail,
+  cactusDetail,
+  tulipDetail,
+  beachDetail,
+  airplaneDetail,
+  lighthouseDetail,
+  robotDetail,
+  unicornDetail,
 ]
 
 const byId = new Map(LESSONS.map((l) => [l.id, l]))
@@ -147,8 +245,9 @@ export const CATEGORIES: Category[] = ['prik', 'dyr', 'natur', 'mennesker', 'tin
 export const SUBS: Partial<Record<Category, Sub[]>> = {
   dyr: ['fugle', 'fisk', 'landdyr', 'insekter'],
   natur: ['blomster', 'landskab'],
-  mennesker: ['ansigter', 'krop'],
-  ting: ['koeretoejer', 'bygninger', 'rummet'],
+  mennesker: ['ansigter', 'krop', 'dukker'],
+  ting: ['koeretoejer', 'maskiner', 'bygninger', 'rummet'],
+  fantasi: ['havfruer', 'eventyr'],
 }
 
 export const CATEGORY_ICON: Record<Category, string> = {

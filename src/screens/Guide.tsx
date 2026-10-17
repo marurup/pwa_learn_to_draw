@@ -14,8 +14,8 @@ const INTEREST_ICON: Record<Interest, string> = {
   animals: '🐾',
   flowers: '🌸',
   people: '🙂',
-  things: '🚀',
-  fantasy: '🐉',
+  things: '🏍️',
+  fantasy: '🧜‍♀️',
   technique: '🌗',
   surprise: '🎁',
 }

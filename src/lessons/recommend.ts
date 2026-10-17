@@ -19,7 +19,7 @@ export function matchesInterest(lesson: Lesson, interest: Interest): boolean {
     case 'people':
       return lesson.category === 'mennesker'
     case 'things':
-      return lesson.category === 'ting' || ['koeretoejer', 'bygninger', 'rummet'].includes(lesson.sub ?? '')
+      return lesson.category === 'ting' || ['koeretoejer', 'maskiner', 'bygninger', 'rummet'].includes(lesson.sub ?? '')
     case 'fantasy':
       return lesson.category === 'fantasi'
     case 'technique':

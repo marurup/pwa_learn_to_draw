@@ -42,6 +42,7 @@ export const unicorn: Lesson = {
   id: 'unicorn',
   title: { da: 'Enhjørning', en: 'Unicorn' },
   category: 'fantasi',
+  sub: 'eventyr',
   level: 2,
   minutes: 12,
   intro: {

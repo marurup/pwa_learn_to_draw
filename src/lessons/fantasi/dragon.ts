@@ -36,6 +36,7 @@ export const dragon: Lesson = {
   id: 'dragon',
   title: { da: 'Drage', en: 'Dragon' },
   category: 'fantasi',
+  sub: 'eventyr',
   level: 3,
   style: 'detaljer',
   minutes: 25,
