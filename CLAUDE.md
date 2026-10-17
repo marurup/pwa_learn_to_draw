@@ -28,6 +28,10 @@ A lesson is a file in `src/lessons/<category>/`, registered in `src/lessons/inde
 - where it makes sense, a realistic version (`style: 'naturtro'`, same `motif`, level 3–4) with guidelines,
   real proportions and soft shading.
 
+**Figures from films and games get our own names and designs.** The app is public, so drawings inspired by
+films and games (an ice princess, a green block monster, a space knight) never use trademarked names –
+not in titles, texts or ids – and are drawn in our own simplified style rather than copied.
+
 A test in `src/lessons/lessons.test.ts` fails when a simple lesson has no other version; only add a lesson to its
 exception list when a variant really makes no sense.
 

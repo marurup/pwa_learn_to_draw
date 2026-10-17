@@ -94,6 +94,14 @@ describe('lesson catalogue', () => {
     expect(missing).toEqual([])
   })
 
+  it('keeps trademarked names out of the drawings (see CLAUDE.md)', () => {
+    const banned = /elsa|olaf|frozen|minecraft|creeper|fortnite|roblox|rocket league|star wars|jedi|sith|darth|vader|yoda|grogu|lightsaber|droid|x-wing|stormtrooper/i
+    for (const lesson of LESSONS) {
+      const all = [lesson.id, ...texts(lesson).flatMap((t) => [t.da, t.en])].join(' | ')
+      expect(all.match(banned)?.[0], lesson.id).toBeUndefined()
+    }
+  })
+
   it('lets the dress-up doll change clothes: each outfit starts without the old dress', () => {
     for (const id of ['doll-princess', 'doll-ballerina', 'doll-mermaid']) {
       expect(extensionsOf('doll').map((l) => l.id)).toContain(id)

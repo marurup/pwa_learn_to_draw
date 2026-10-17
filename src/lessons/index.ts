@@ -114,6 +114,15 @@ import { airplaneDetail } from './ting/airplane-detail'
 import { lighthouseDetail } from './ting/lighthouse-detail'
 import { robotDetail } from './fantasi/robot-detail'
 import { unicornDetail } from './fantasi/unicorn-detail'
+import { pumpkin } from './hoejtider/pumpkin'
+import { pumpkinDetail } from './hoejtider/pumpkin-detail'
+import { pumpkinReal } from './hoejtider/pumpkin-real'
+import { witch } from './hoejtider/witch'
+import { witchDetail } from './hoejtider/witch-detail'
+import { ghost } from './hoejtider/ghost'
+import { ghostDetail } from './hoejtider/ghost-detail'
+import { hauntedHouse } from './hoejtider/haunted-house'
+import { hauntedHouseDetail } from './hoejtider/haunted-house-detail'
 
 /** Every lesson, in the order they appear in the catalog (easiest first). */
 export const LESSONS: Lesson[] = [
@@ -232,6 +241,15 @@ export const LESSONS: Lesson[] = [
   lighthouseDetail,
   robotDetail,
   unicornDetail,
+  pumpkin,
+  pumpkinDetail,
+  pumpkinReal,
+  witch,
+  witchDetail,
+  ghost,
+  ghostDetail,
+  hauntedHouse,
+  hauntedHouseDetail,
 ]
 
 const byId = new Map(LESSONS.map((l) => [l.id, l]))
@@ -240,7 +258,7 @@ export function getLesson(id: string | undefined): Lesson | undefined {
   return id ? byId.get(id) : undefined
 }
 
-export const CATEGORIES: Category[] = ['prik', 'dyr', 'natur', 'mennesker', 'ting', 'fantasi', 'teknik']
+export const CATEGORIES: Category[] = ['prik', 'dyr', 'natur', 'mennesker', 'ting', 'fantasi', 'hoejtider', 'teknik']
 
 export const SUBS: Partial<Record<Category, Sub[]>> = {
   dyr: ['fugle', 'fisk', 'landdyr', 'insekter'],
@@ -248,6 +266,7 @@ export const SUBS: Partial<Record<Category, Sub[]>> = {
   mennesker: ['ansigter', 'krop', 'dukker'],
   ting: ['koeretoejer', 'maskiner', 'bygninger', 'rummet'],
   fantasi: ['havfruer', 'eventyr'],
+  hoejtider: ['halloween'],
 }
 
 export const CATEGORY_ICON: Record<Category, string> = {
@@ -257,6 +276,8 @@ export const CATEGORY_ICON: Record<Category, string> = {
   mennesker: '🙂',
   ting: '🚗',
   fantasi: '🐉',
+  hoejtider: '🎃',
+  spil: '🎮',
   teknik: '✏️',
 }
 
