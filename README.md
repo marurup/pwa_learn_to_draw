@@ -54,6 +54,8 @@ Skærmen er kun instruktør: den viser trin for trin, hvad der skal tegnes, og g
   kommer frem igen. Så kommer knappen *Ny version klar – opdatér* frem. Man kan også selv trykke
   *Søg efter ny version*.
 
+Det kan bruges her: https://marurup.github.io/pwa_learn_to_draw/
+
 ## Kom i gang
 
 ```bash
